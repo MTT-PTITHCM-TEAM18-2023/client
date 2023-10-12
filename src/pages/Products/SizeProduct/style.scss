@@ -1,0 +1,24 @@
+@import "../../../style/global.scss";
+@import "../../../style/mixin.scss";
+
+.products-page {
+  &__size {
+    padding: 12px;
+    &__item {
+      display: inline-block;
+      margin: 0 12px 12px 0;
+      font-size: 1.6rem;
+      padding: 4px 16px;
+      color: $white;
+      background-color: $black;
+      cursor: pointer;
+      @include transition();
+      &:hover {
+        background-color: $color-primary;
+      }
+    }
+    .active-size {
+      background-color: $color-primary;
+    }
+  }
+}

@@ -1,0 +1,23 @@
+@import "../../../style/global.scss";
+@import "../../../style/mixin.scss";
+
+.navigation-admin {
+  height: 100vh;
+  padding-top: 24px;
+
+  &__link {
+    display: block;
+    padding: 8px;
+    font-size: 1.6rem;
+    color: $white;
+
+    i {
+      margin-right: 12px;
+    }
+  }
+
+  &__active {
+    color: #4e73df;
+    background-color: $white;
+  }
+}

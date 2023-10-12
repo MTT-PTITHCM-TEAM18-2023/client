@@ -1,0 +1,21 @@
+@import "../../../style/global.scss";
+
+.products-page {
+  &__rating {
+    padding: 12px;
+    &__item {
+      cursor: pointer;
+      .show-stars {
+        @include transition();
+      }
+      &:hover {
+        .show-stars {
+          color: $color-second;
+        }
+      }
+    }
+  }
+  .active-star .show-stars {
+    color: $color-second;
+  }
+}

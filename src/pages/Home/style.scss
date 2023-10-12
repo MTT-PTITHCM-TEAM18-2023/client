@@ -1,0 +1,216 @@
+@import "./../../style/mixin.scss";
+@import "./../../style/global.scss";
+
+.feature {
+  @include borderMe();
+  margin-top: 100px;
+
+  &__item {
+    text-align: center;
+    padding: 40px;
+    position: relative;
+    &__icon {
+      font-size: 2.4rem;
+      margin-bottom: 16px;
+    }
+
+    h3 {
+      font-size: 1.8rem;
+    }
+    &::after {
+      content: "";
+      position: absolute;
+      border-left: 0.5px solid $silver;
+      height: 60%;
+      right: 0;
+      @include transform("", "", 50%, -50%);
+      @include for-size(mdC, down) {
+        border: none;
+      }
+    }
+  }
+
+  .row {
+    .col-xl-3:last-child {
+      .feature__item::after {
+        border: none;
+      }
+    }
+  }
+}
+
+.category-area {
+  margin-top: 100px;
+
+  &__clock {
+    position: relative;
+    overflow: hidden;
+    height: calc(100% - 24px);
+    @include transition();
+    &:hover .overlay {
+      visibility: visible;
+    }
+    &:hover .category-area__clock__link {
+      top: 50%;
+    }
+
+    &__img {
+      width: 100%;
+      height: 0;
+      padding-top: 100%;
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center center;
+      img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
+    }
+
+    &__link {
+      position: absolute;
+      top: 100%;
+      width: 100%;
+      text-align: center;
+      z-index: 3;
+      @include transition();
+
+      a {
+        font-size: 2.4rem;
+        color: $white;
+        &:hover {
+          color: $white;
+        }
+      }
+    }
+  }
+}
+
+.product-area {
+  padding-top: 100px;
+  &__header {
+    text-align: center;
+    width: 50%;
+    margin: auto;
+    @include for-size(mdC, down) {
+      width: 80%;
+    }
+    &__title {
+      font-size: 4rem;
+      margin-bottom: 0;
+    }
+    &__desc {
+      color: $silver;
+      margin-bottom: 50px;
+    }
+  }
+  .swiper-button-prev,
+  .swiper-button-next {
+    top: 4%;
+    left: 20%;
+    color: $font-dark;
+    @include for-size(mdC, down) {
+      left: 2%;
+    }
+    &:hover {
+      &::after {
+        color: $font-dark;
+      }
+    }
+    &::after {
+      color: $silver;
+    }
+  }
+
+  .swiper-button-next {
+    right: 20%;
+    left: auto;
+    @include for-size(mdC, down) {
+      right: 2%;
+    }
+  }
+}
+
+.countdown-area {
+  margin-top: 100px;
+  &__time {
+    position: relative;
+    background-image: url(../../assets/images/imgforcountdown.webp);
+    background-size: cover;
+    min-height: 100vh;
+    &::after {
+      content: "";
+      background-color: $color-overlay;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      z-index: 1;
+    }
+    &__content {
+      text-align: center;
+      position: absolute;
+      z-index: 2;
+      width: 100%;
+      height: 100%;
+      h2 {
+        font-size: 3rem;
+        color: $white;
+        margin-top: 20%;
+      }
+      p {
+        color: $white;
+        font-size: 1.6rem;
+      }
+      .btn--primary:hover {
+        color: $white;
+      }
+
+      .btn--primary {
+        margin-top: 20px;
+      }
+      .countdown {
+        width: 80%;
+        margin: auto;
+        @include for-size(mdC, down) {
+          width: 98%;
+          &__item {
+            padding: 12px;
+          }
+        }
+      }
+    }
+  }
+
+  .container-fluid {
+    padding: 0;
+  }
+
+  .category-area__clock {
+    height: 100vh;
+    margin-bottom: 0 !important;
+  }
+}
+
+.brand-area {
+  margin-top: 100px;
+  &__item {
+    margin: auto;
+    width: 60%;
+    height: 100%;
+    opacity: 0.5;
+    cursor: pointer;
+    @include flex-box(center, center);
+    @include transition();
+    &:hover {
+      opacity: 1;
+    }
+    @include for-size(mdC, down) {
+      margin-top: 32px;
+    }
+  }
+}

@@ -1,0 +1,69 @@
+@import "./../../style/global.scss";
+@import "./../../style/variable.scss";
+@import "./../../style/mixin.scss";
+
+.footer {
+  background-color: $font-dark;
+  padding: 100px 0;
+  margin-top: 100px;
+  &__item {
+    @include for-size(mdC, down) {
+      margin-top: 50px;
+    }
+  }
+  h2 {
+    color: $white;
+  }
+  p {
+    color: $silver;
+  }
+
+  &__search-btn span {
+    color: $white;
+    background: linear-gradient(93deg, $color-second 0%, $color-primary 100%);
+
+    i {
+      font-size: 1.5rem;
+      padding: 0 12px;
+    }
+  }
+
+  &__search {
+    input {
+      font-size: 1.5rem;
+    }
+    height: 40px;
+  }
+
+  &__list-img {
+    display: flex;
+    margin: 0 -4px;
+    flex-wrap: wrap;
+    &__item {
+      flex: 0 0 25%;
+      padding: 4px;
+    }
+  }
+
+  &__social {
+    display: flex;
+    &__item {
+      margin-right: 24px;
+      a {
+        color: $white;
+        &:hover {
+          color: $color-primary;
+        }
+      }
+    }
+  }
+
+  &__copyright {
+    margin-top: 70px;
+    a,
+    i {
+      color: $color-primary;
+      padding: 0 4px;
+    }
+  }
+}

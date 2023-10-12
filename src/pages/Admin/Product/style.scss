@@ -1,0 +1,29 @@
+.product-admin-page {
+  padding: 24px;
+  background-color: #fefefe;
+
+  .btn--editProduct {
+    outline: none;
+    border: none;
+    background-color: transparent;
+    &:hover {
+      color: black;
+      background-color: transparent;
+    }
+  }
+
+  &__action {
+    margin-bottom: 20px;
+    i {
+      margin-right: 8px;
+    }
+    input {
+      width: 300px;
+    }
+  }
+
+  .btn-cursor {
+    cursor: pointer;
+    color: red;
+  }
+}

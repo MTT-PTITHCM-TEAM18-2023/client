@@ -1,0 +1,56 @@
+@import "../../style/global.scss";
+@import "../../style/mixin.scss";
+
+.login-page {
+  @include borderMeLess();
+
+  &__img {
+    background-image: url(../../assets/images/background-login.webp);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 100%;
+    padding-top: 100%;
+    position: relative;
+    &::after {
+      content: "";
+      background-color: $color-overlay;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      z-index: 1;
+    }
+
+    &__content {
+      position: absolute;
+      top: 0;
+      color: $white;
+      z-index: 2;
+      text-align: center;
+      padding: 0 15%;
+      margin-top: 20%;
+      h2 {
+        font-size: 2.4rem;
+        color: $white;
+      }
+      p {
+        margin-bottom: 32px;
+      }
+      .btn--primary:hover {
+        color: $white;
+      }
+    }
+  }
+
+  &__form {
+    padding: 24px;
+    h2 {
+      text-align: center;
+      margin-top: 15%;
+      padding-bottom: 24px;
+    }
+  }
+}

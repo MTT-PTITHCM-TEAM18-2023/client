@@ -1,0 +1,133 @@
+{
+  "header_text": {
+    "free": "Giao hàng miễn phí",
+    "order": "Đặt hàng từ tất cả mặt hàng"
+  },
+  "language": {
+    "name": "Ngôn ngữ",
+    "english": "Tiếng Anh",
+    "vietnam": "Tiếng Việt"
+  },
+  "navigation": {
+    "home": "Trang chủ",
+    "shop": "Cửa hàng",
+    "aboutUs": "Về chúng tôi",
+    "contact": "Liên hệ",
+    "blog": "Nhật ký"
+  },
+  "Logout": "Đăng xuất",
+  "Collection": "Bộ sưu tập",
+  "Faq's": "Hỏi đáp",
+  "Account": "Tài khoản",
+  "Register": "Đăng ký",
+  "Login": "Đăng nhập",
+  "Hotline": "Đường dây nóng",
+  "carousel": {
+    "name": "Bộ sưu tập mới của Nike!",
+    "description": "Mang đến một diện mạo mới cho nhượng quyền thương hiệu Waffle mang tính biểu tượng, Nike Waffle One cân bằng mọi thứ bạn yêu thích nhất về di sản mà Nike đang chạy bằng những cải tiến mới. giúp bạn sẵn sàng cho mùa hè. Đế giữa mùa xuân mới có hình dạng nêm cổ điển trong khi đế ngoài Waffle được cập nhật cung cấp mức độ hỗ trợ và lực kéo mà bạn phải tin tưởng.",
+    "button": "Khám phá cùng chúng tôi",
+    "titleProduct1": "Sản phẩm sắp ra mắt",
+    "titleProduct2": "Sản phẩm mới nhất"
+  },
+  "feature": {
+    "delivery": "Giao hàng miễn phí",
+    "policy": "Chính sách hoàn trả",
+    "support": "Hỗ trợ 24/7",
+    "payment": "Thanh toán an toàn",
+    "description": "Giao hàng miễn phí cho tất cả các đơn đặt hàng"
+  },
+  "category": {
+    "gotoshop": "Đi đến Shop"
+  },
+  "button": {
+    "addtocart": "Thêm vào giỏ",
+    "viewmore": "Xem chi tiết",
+    "shopNow": "mua sắm ngay bây giờ ",
+    "submit": "Xác nhận",
+    "guide": "HD cách chọn size giày"
+  },
+  "countDown": {
+    "title": "Ưu đãi độc quyền sẽ sớm kết thúc!",
+    "desc": "Những người cực kỳ yêu thích hệ thống thân thiện với môi trường."
+  },
+  "productsPage": {
+    "category": "Danh mục sản phẩm",
+    "size": "Kích cỡ",
+    "color": "Màu sắc",
+    "rating": "Đánh giá"
+  },
+  "detailProduct": {
+    "addReview": "Thêm một bài đánh giá",
+    "color": "Màu sắc"
+  },
+  "productDetail": {
+    "size": "Kích thước",
+    "review": "Nội dung",
+    "yourRating": "Đánh giá của bạn",
+    "quantity": "Số lượng"
+  },
+  "form": {
+    "usernameRequired": "Vui lòng nhập tên người dùng của bạn!",
+    "passwordRequired": "Vui lòng nhập mật khẩu của bạn!"
+  },
+  "register": {
+    "title": "TẠO TÀI KHOẢN MỚI",
+    "agreement1": "Tôi đã đọc",
+    "agreement2": "hợp đồng",
+    "register": "Đăng ký",
+    "loginBtn": "ĐĂNG NHẬP BÂY GIỜ",
+    "titleImg": "Mới vào trang web của chúng tôi?",
+    "DescImg": "Có những tiến bộ trong khoa học và công nghệ hàng ngày và một ví dụ điển hình về điều này là",
+    "email": "E-mail",
+    "password": "Mật khẩu",
+    "confirmPassword": "Xác nhận mật khẩu",
+    "phone": "Số điện thoại",
+    "address": "Địa chỉ",
+    "gender": "Giới tính",
+    "update": "Cập nhật",
+    "fullName": "Họ và tên",
+    "avatar": "Ảnh đại diện"
+  },
+  "login": {
+    "btnLogin": "Tạo một tài khoản",
+    "title": "ĐĂNG NHẬP ĐỂ VÀO",
+    "rememberMe": "Nhớ tôi",
+    "submit": "Đăng nhập"
+  },
+  "header": {
+    "profile": "Hồ sơ",
+    "logout": "Đăng xuất"
+  },
+  "cartPage": {
+    "color": "Màu sắc:",
+    "size": "Kích thước:",
+    "messageDeleteProduct": "Bạn có chắc chắn xóa sản phẩm này không?",
+    "titleOrder": "Đơn hàng của bạn",
+    "total": "Toàn bộ",
+    "subTotal": "Tổng phụ",
+    "shipping": "Phí vận chuyển",
+    "paymentRequired": "Vui lòng nhập chọn hình thức thanh toán",
+    "paymentRequiredInput": "Vui lòng nhập thẻ số của bạn",
+    "buttonSummit": "Kết thúc đặt hàng",
+    "chekbox1": "Thanh toán khi nhận hàng",
+    "chekbox2": "Thanh toán bằng thẻ",
+    "price": "Giá bán",
+    "quantity": "Số lượng",
+    "action": "Hành động",
+    "product": "Sản phẩm",
+    "Address": "Địa chỉ",
+    "phone": "Điện thoại",
+    "typePayment": "Hình thức thanh toán",
+    "dateBuy": "Ngày mua",
+    "bankRequiredInput": "Vui lòng nhập tên ngân hàng."
+  },
+  "productSeen": {
+    "title": "Các sản phẩm đã xem"
+  },
+  "profilePage": {
+    "title": "Thông tin User"
+  },
+  "reviews": {
+    "emptyReview": "Không có đánh giá"
+  }
+}

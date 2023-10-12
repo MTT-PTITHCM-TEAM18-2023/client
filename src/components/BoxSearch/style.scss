@@ -1,0 +1,26 @@
+@import "../../style/mixin.scss";
+@import "../../style/global.scss";
+.box-search {
+  @include borderMeLess();
+  background-color: $white;
+  z-index: 1000;
+  padding: 24px;
+  position: absolute;
+  width: 83%;
+
+  &__link {
+    @include flex-box(flex-start, center);
+    color: $font-dark;
+    margin-bottom: 8px;
+    cursor: pointer;
+
+    img {
+      width: 50px;
+      margin-right: 12px;
+    }
+    &:hover {
+      color: $font-dark;
+      background-color: $bg-dark-light;
+    }
+  }
+}

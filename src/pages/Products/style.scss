@@ -1,0 +1,32 @@
+@import "../../style/variable.scss";
+@import "../../style/mixin.scss";
+
+.products-page {
+  margin-top: 50px;
+  &__filter {
+    &--header {
+      background-color: $color-primary;
+      padding: 8px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      .ant-select {
+        margin-right: 12px;
+      }
+    }
+    &__box {
+      margin-bottom: 12px;
+      box-shadow: 0 10px 10px rgba(153, 153, 153, 0.1);
+    }
+    &__header {
+      font-size: 1.6rem;
+      padding: 8px 0;
+      background-color: $color-primary;
+      padding-left: 12px;
+      color: $white;
+    }
+  }
+  &__list {
+    margin-top: 40px;
+  }
+}

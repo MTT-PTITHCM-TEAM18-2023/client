@@ -1,0 +1,30 @@
+@import "../../style/global.scss";
+
+.product-seen {
+  overflow: hidden;
+
+  &__title {
+    font-size: 2rem;
+    display: inline-block;
+    border-bottom: 3px solid $color-primary;
+    margin-bottom: 32px;
+  }
+
+  .swiper-container {
+    width: 100%;
+    height: 470px !important;
+    .swiper-button-prev,
+    .swiper-button-next {
+      color: $font-dark;
+    }
+  }
+
+  .swiper-slide {
+    opacity: 1 !important;
+    text-align: left !important;
+  }
+
+  .swiper-pagination {
+    display: none;
+  }
+}

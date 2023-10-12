@@ -1,0 +1,12 @@
+.list-ordered {
+  &__name {
+    &__link {
+      color: black;
+    }
+  }
+  &__img {
+    img {
+      width: 100px;
+    }
+  }
+}

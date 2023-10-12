@@ -1,0 +1,39 @@
+@import "./../../style/mixin.scss";
+@import "./../../style/global.scss";
+.category-item {
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 24px;
+  @include transition();
+  &:hover .overlay {
+    visibility: visible;
+  }
+  &:hover .category-item__link {
+    top: 50%;
+  }
+
+  &__img {
+    img {
+      height: 192px;
+      width: 100%;
+      vertical-align: middle;
+    }
+  }
+
+  &__link {
+    position: absolute;
+    top: 100%;
+    width: 100%;
+    text-align: center;
+    @include transition();
+    z-index: 3;
+
+    a {
+      font-size: 2.4rem;
+      color: $white;
+      &:hover {
+        color: $color-primary;
+      }
+    }
+  }
+}

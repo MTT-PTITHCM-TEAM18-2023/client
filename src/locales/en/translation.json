@@ -1,0 +1,133 @@
+{
+  "header_text": {
+    "free": "Free shipping",
+    "order": "Orders From All item"
+  },
+  "language": {
+    "name": "Language",
+    "english": "English",
+    "vietnam": "Vietnamese"
+  },
+  "navigation": {
+    "home": "Home",
+    "shop": "Shop",
+    "aboutUs": "About Us",
+    "contact": "Contact",
+    "blog": "Blog"
+  },
+  "Collection": "Collection",
+  "Blog": "Blog",
+  "Account": "Account",
+  "Register": "Register",
+  "Login": "Login",
+  "Hotline": "Hotline",
+  "carousel": {
+    "name": "Nike new Colection!",
+    "description": "Bringing a new look to the iconic Waffle franchise, the Nike Waffle One balances everything you love most about heritage Nike running with fresh innovations.Its new durable plastic heel clip adds energy, while a mixture of transparent mesh and luscious suedes get you ready for summertime.The new springy midsole features the classic wedge shape while the updated Waffle outsole provides a level of support and traction you have to feel to believe.",
+    "button": "Explore with us",
+    "titleProduct1": "Coming Product",
+    "titleProduct2": "Latest Product"
+  },
+  "feature": {
+    "delivery": "Free Delivery",
+    "policy": "Return Policy",
+    "support": "24/7 Support",
+    "payment": "Secure Payment",
+    "description": "Free Shipping on all order"
+  },
+  "category": {
+    "gotoshop": "Go to Shop"
+  },
+  "button": {
+    "addtocart": "Add to cart",
+    "viewmore": "View more",
+    "shopNow": "Shop now",
+    "submit": "Submit",
+    "guide": "Guide how to choose shoe size"
+  },
+  "countDown": {
+    "title": "Exclusive Hot Deal Ends Soon!",
+    "desc": "Who are in extremely love with eco friendly system."
+  },
+  "productsPage": {
+    "category": "Category",
+    "size": "Size",
+    "color": "Colors",
+    "rating": "Rating"
+  },
+  "detailProduct": {
+    "addReview": "Add a review",
+    "color": "Color"
+  },
+  "productDetail": {
+    "size": "Size",
+    "review": "Reviewes",
+    "yourRating": "Your rating",
+    "quantity": "Quantity"
+  },
+  "form": {
+    "usernameRequired": "Please input your username!",
+    "passwordRequired": "Please input your password!"
+  },
+  "register": {
+    "title": "CREATE A NEW ACCOUNT",
+    "agreement1": "I have read the",
+    "agreement2": "agreement",
+    "register": "Register",
+    "loginBtn": "LOGIN NOW",
+    "titleImg": "New to our website?",
+    "DescImg": "There are advances being made in science and technology everyday, and a good example of this is the",
+    "email": "E-mail",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "phone": "Phone Number",
+    "address": "Address",
+    "gender": "Gender",
+    "update": "Update",
+    "fullName": "FullName",
+    "avatar": "Avatar"
+  },
+  "login": {
+    "btnLogin": "Create an Account",
+    "title": "LOG IN TO ENTER",
+    "rememberMe": "Remember me",
+    "submit": "Submit"
+  },
+  "header": {
+    "profile": "Profile",
+    "logout": "Logout"
+  },
+  "cartPage": {
+    "color": "Color:",
+    "size": "Size:",
+    "messageDeleteProduct": "Are you sure to delete this product?",
+    "titleOrder": "Your Order",
+    "product": "Product",
+    "total": "Total",
+    "subTotal": "Subtotal",
+    "shipping": "Shipping fee",
+    "paymentRequired": "Please input choose payment type",
+    "paymentRequiredInput": "Please input your number card",
+    "buttonSummit": "Complete order",
+    "chekbox1": "Payment on delivery",
+    "chekbox2": "Payment by card",
+    "price": "Price",
+    "quantity": "Quantity",
+    "action": "Action",
+    "Address": "Address",
+    "phone": "Phone",
+    "typePayment": "Payments",
+    "dateBuy": "Date Buy",
+    "bankRequiredInput": "Please input name bank."
+  },
+  "productSeen": {
+    "title": "Viewed products"
+  },
+  "profilePage": {
+    "listOrder": "List Ordered",
+    "title": "Information User"
+  },
+  "reviews": {
+    "emptyReview": "Not have review"
+  }
+}

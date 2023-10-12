@@ -1,0 +1,133 @@
+@import "./../../style/global.scss";
+@import "./../../style/mixin.scss";
+@import "./../../style/variable.scss";
+
+.header {
+  position: relative;
+  padding: 15px 30px;
+  width: 100%;
+  z-index: 99;
+  background-color: $white;
+  @include borderMe();
+  @include for-size(mdC, down) {
+    padding: 12px 0;
+  }
+
+  &__top {
+    display: flex;
+    justify-content: flex-end;
+    padding-bottom: 12px;
+    border-bottom: 1px solid $silver;
+    @include for-size(mdC, down) {
+      justify-content: space-between;
+    }
+    &__sigup {
+      a {
+        display: inline-block;
+        color: $font-dark;
+        margin-left: 12px;
+        &:hover {
+          color: $color-primary;
+        }
+      }
+      .ant-avatar-image {
+        margin-right: 8px;
+      }
+    }
+    &__avatar {
+      display: flex !important;
+      align-items: center;
+      justify-content: space-between;
+      height: 40px !important;
+      padding: 12px 12px !important;
+      margin-left: 12px;
+      border: none !important;
+      &:hover {
+        color: $color-primary !important;
+      }
+    }
+  }
+
+  &__main {
+    padding-top: 12px;
+    .btn--search-header {
+      background-color: $white;
+      color: $font-dark;
+      border: none;
+      font-size: 1.6rem;
+      &:focus {
+        background-color: $white !important;
+      }
+    }
+  }
+
+  &__search {
+    width: 100%;
+    background: linear-gradient(93deg, $color-second 0%, $color-primary 100%);
+    input {
+      height: 50px;
+      font-size: 1.5rem;
+      color: $white !important;
+      padding-left: 24px;
+      background: inherit;
+      outline: none;
+      border: none;
+
+      &:focus {
+        background: inherit;
+        outline: none;
+        border: none;
+        box-shadow: none;
+      }
+      &::placeholder {
+        color: $white;
+      }
+    }
+  }
+
+  &__cart {
+    color: $font-dark;
+    display: flex;
+    align-items: center;
+    padding: 0 16px;
+    font-size: 1.6rem;
+    position: relative;
+    &__show-amount {
+      content: "";
+      @include square-box(20px);
+      color: $white;
+      font-size: 1.2rem;
+      text-align: center;
+      line-height: 20px;
+      border-radius: 50%;
+      background-color: $color-primary;
+      position: absolute;
+      top: -100%;
+      right: 0;
+    }
+    &:hover {
+      color: $color-primary;
+    }
+  }
+
+  &__language {
+    display: flex;
+    align-items: center;
+    > span {
+      margin-right: 4px;
+      @include for-size(mdC, down) {
+        display: none;
+        margin: 0;
+      }
+    }
+
+    &__img {
+      width: 30px;
+      margin-right: 4px;
+    }
+  }
+
+  &__navlink-active {
+    color: $color-primary !important;
+  }
+}

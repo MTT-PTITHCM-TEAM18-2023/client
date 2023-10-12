@@ -1,0 +1,48 @@
+@import "../../../style/global.scss";
+@import "../../../style/mixin.scss";
+.products-page {
+  &__color {
+    padding: 12px;
+    &__item {
+      display: inline-block;
+      border-radius: 50%;
+      margin: 0 12px 12px 0;
+      cursor: pointer;
+      @include square-box(32px);
+      @include borderMeLess();
+      @include transition();
+
+      &--red {
+        background-color: $red;
+      }
+
+      &--black {
+        background-color: $black;
+      }
+
+      &--white {
+        background-color: $white;
+      }
+
+      &--gray {
+        background-color: $silver;
+      }
+    }
+    .active {
+      @include borderMe();
+      transform: scale(1.2);
+      &--red {
+        border-color: $red;
+      }
+      &--white {
+        border-color: $white;
+      }
+      &--black {
+        border-color: $black;
+      }
+      &--gray {
+        border-color: $silver;
+      }
+    }
+  }
+}

@@ -1,0 +1,9 @@
+@import "../../style/mixin.scss";
+
+.register-page {
+  @include borderMeLess();
+
+  h2 {
+    margin-top: 10% !important;
+  }
+}

@@ -1,0 +1,18 @@
+@import "../../../style/global.scss";
+@import "../../../style/mixin.scss";
+
+.countdown {
+  background-color: $white;
+  @include borderMe();
+  display: flex;
+  justify-content: space-around;
+  border-radius: 8px;
+  &__item {
+    text-align: center;
+    padding: 24px;
+    span {
+      font-size: 4rem;
+      font-weight: bold;
+    }
+  }
+}
