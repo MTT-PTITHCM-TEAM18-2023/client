@@ -1,67 +1,75 @@
-import { Button, Dropdown, Menu } from "antd";
-import Avatar from "antd/lib/avatar/avatar";
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Route } from "react-router-dom";
-// import { userLogout } from "../../actions/user";
-import history from "../../untils/history";
-import MenuAdmin from "./Menu";
-import "./style.scss";
+import { useLocation, Route, Switch } from "react-router-dom";
 
-function AdminLayout(props) {
-  const { path, component, exact } = props;
-  const dispatch = useDispatch();
-  const user = useSelector((state) => state.user);
+import AdminNavbar from "../../components/AdminNavbar";
+import AdminFooter from "../../components/AdminFooter";
+import AdminSidebar from "../../components/AdminSidebar";
+import FixedPlugin from "../../components/FixedPlugin/index.js";
 
-  const handleLogout = () => {
-    localStorage.removeItem("authentication_token");
-    // dispatch(userLogout());
-    history.push("/");
+import routes from "../../routers/adminRouter";
+
+import sidebarImage from "../../assets/images/sidebar-3.jpg";
+
+function Admin() {
+  const [image, setImage] = React.useState(sidebarImage);
+  const [color, setColor] = React.useState("black");
+  const [hasImage, setHasImage] = React.useState(true);
+  const location = useLocation();
+  const mainPanel = React.useRef(null);
+  const getRoutes = (routes) => {
+    return routes.map((prop) => {
+      if (prop.layout === "/admin") {
+        return (
+          <Route
+            path={prop.layout + prop.path}
+            render={(props) => <prop.component {...props} />}
+            key={prop.path}
+          />
+        );
+      } else {
+        return null;
+      }
+    });
   };
-
-  const menu = (
-    <Menu>
-      <Menu.Item key={2}>
-        <span onClick={handleLogout}>Logout</span>
-      </Menu.Item>
-    </Menu>
-  );
-
+  React.useEffect(() => {
+    document.documentElement.scrollTop = 0;
+    document.scrollingElement.scrollTop = 0;
+    mainPanel.current.scrollTop = 0;
+    if (
+      window.innerWidth < 993 &&
+      document.documentElement.className.indexOf("nav-open") !== -1
+    ) {
+      document.documentElement.classList.toggle("nav-open");
+      const element = document.getElementById("bodyClick");
+      element.parentNode.removeChild(element);
+    }
+  }, [location]);
   return (
-    <Route path={path} exact={exact}>
-      <div className="layout-admin">
-        <div className="layout-admin__menu">
-          <div className="layout-admin__menu__img">
-            <i className="far fa-smile-wink"></i>
-            <span>ADMIN NS</span>
+    <>
+      <div className="wrapper">
+        <AdminSidebar
+          color={color}
+          image={hasImage ? image : ""}
+          routes={routes}
+        />
+        <div className="main-panel" ref={mainPanel}>
+          <AdminNavbar />
+          <div className="content">
+            <Switch>{getRoutes(routes)}</Switch>
           </div>
-          <MenuAdmin />
-        </div>
-        <div className="layout-admin__content">
-          <div className="layout-admin__content__header">
-            <Dropdown
-              className="header__top__avatar"
-              overlay={menu}
-              placement="bottomCenter"
-              arrow
-            >
-              <Button>
-                <Avatar
-                  src={
-                    user?.avatar
-                      ? user.avatar
-                      : "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
-                  }
-                />
-                {user?.email}
-              </Button>
-            </Dropdown>
-          </div>
-          <div className="layout-admin__content__body">{component}</div>
+          <AdminFooter />
         </div>
       </div>
-    </Route>
+      <FixedPlugin
+        hasImage={hasImage}
+        setHasImage={() => setHasImage(!hasImage)}
+        color={color}
+        setColor={(color) => setColor(color)}
+        image={image}
+        setImage={(image) => setImage(image)}
+      />
+    </>
   );
 }
 
-export default AdminLayout;
+export default Admin;
