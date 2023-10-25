@@ -28,6 +28,7 @@ function Login() {
     control,
     handleSubmit,
     formState: { errors, isSubmitting },
+    setError,
   } = useForm({
     defaultValues: {
       email: "",
@@ -46,12 +47,18 @@ function Login() {
   }, [user]);
 
   const onSubmit = async (values) => {
-    const res = await loginService(values);
-    console.log("res", res);
-    localStorage.setItem("authentication_token", res.data.data.jwt);
-    dispatch(setUserMeta(res.data));
-    toast.success(res.data.message);
-    history.push("/admin/dashboard");
+    try {
+      const res = await loginService(values);
+      localStorage.setItem("authentication_token", res.data.data.jwt);
+      dispatch(setUserMeta(res.data));
+      toast.success(res.data.message);
+      history.push("/admin/dashboard");
+    } catch {
+      setError("password", {
+        type: "custom",
+        message: "Sai email hoặc mật khẩu",
+      });
+    }
   };
 
   return (
@@ -72,75 +79,6 @@ function Login() {
           <Col xl={6}>
             <div className="login-page__form">
               <h2>Đăng nhập</h2>
-              {/* <Form
-                name="formLogin"
-                labelCol={{
-                  span: 8,
-                }}
-                wrapperCol={{
-                  span: 16,
-                }}
-                initialValues={{
-                  remember: true,
-                }}
-                onFinish={onFinish}
-              >
-                <Form.Item
-                  label={t("register.email")}
-                  name="email"
-                  rules={[
-                    {
-                      type: "email",
-                      message: "The input is not valid E-mail!",
-                    },
-                    {
-                      required: true,
-                      message: `${t("form.usernameRequired")}`,
-                    },
-                  ]}
-                >
-                  <Input />
-                </Form.Item>
-
-                <Form.Item
-                  label={t("register.password")}
-                  name="password"
-                  rules={[
-                    {
-                      required: true,
-                      message: `${t("form.passwordRequired")}`,
-                    },
-                  ]}
-                >
-                  <Input.Password />
-                </Form.Item>
-
-                <Form.Item
-                  name="remember"
-                  valuePropName="checked"
-                  wrapperCol={{
-                    offset: 8,
-                    span: 16,
-                  }}
-                >
-                  <Checkbox>{t("login.rememberMe")}</Checkbox>
-                </Form.Item>
-
-                <Form.Item
-                  wrapperCol={{
-                    offset: 8,
-                    span: 16,
-                  }}
-                >
-                  <Button
-                    type="primary"
-                    htmlType="submit"
-                    className="btn btn--primary"
-                  >
-                    {t("login.submit")}
-                  </Button>
-                </Form.Item>
-              </Form> */}
 
               <Form
                 name="basic"

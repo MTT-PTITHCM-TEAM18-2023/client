@@ -17,11 +17,12 @@ const enterProductSchema = yup
   })
   .required();
 
-const EnterProductForm = () => {
+const EnterProductForm = ({ onSubmit }) => {
   const {
     control,
     handleSubmit,
     formState: { errors, isSubmitting },
+    reset,
   } = useForm({
     defaultValues: {
       qty: 0,
@@ -31,9 +32,8 @@ const EnterProductForm = () => {
   });
 
   const handleSubmitForm = (formValues) => {
-    // const { image, ...data } = formValues;
-    console.log("formValues", formValues);
-    // onSubmit({ ...data, imageUrl });
+    onSubmit({ qty: formValues.qty });
+    reset();
   };
   return (
     <div>

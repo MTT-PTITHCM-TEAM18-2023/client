@@ -7,6 +7,8 @@ const Category = () => {
   const [page, setPage] = useState(1);
   const [total, setTotal] = useState(0);
   const [categories, setCategories] = useState([]);
+  const [category, setCategory] = useState(null);
+  const [openEditCategory, setOpenEditCategory] = useState(false);
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
 
   const columns = [
@@ -25,8 +27,7 @@ const Category = () => {
       key: "action",
       render: (_, record) => (
         <Space size="middle">
-          <p>Chỉnh sửa</p>
-          <p>Xóa</p>
+          <Button>Chỉnh sửa</Button>
         </Space>
       ),
     },
@@ -58,12 +59,16 @@ const Category = () => {
     setIsCreateModalOpen(false);
   };
 
+  const handleEditCategory = async ({ id, name }) => {
+    setCategory({ id, name });
+    setOpenEditCategory(true);
+  };
+
   return (
     <div>
       <Button onClick={handleOpenCreateModal}>Thêm danh mục</Button>
-
       <Modal
-        title="Thông tin sản phẩm"
+        title="Tạo danh mục"
         open={isCreateModalOpen}
         footer={null}
         onCancel={handleCloseCreateModal}

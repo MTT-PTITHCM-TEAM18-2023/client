@@ -3,6 +3,7 @@ import { setupListeners } from "@reduxjs/toolkit/query";
 import cart from "./cart";
 import productReducer from "./product";
 import userReducer from "./user";
+import ordersReducer from "./orders";
 
 export const store = configureStore({
   reducer: {
@@ -11,6 +12,7 @@ export const store = configureStore({
     products: productReducer,
     ui: {},
     user: userReducer,
+    orders: ordersReducer,
   },
   // Adding the api middleware enables caching, invalidation, polling,
   // and other useful features of `rtk-query`.
@@ -22,4 +24,5 @@ export const store = configureStore({
 setupListeners(store.dispatch);
 
 export * from "./product";
+export * from "./orders";
 export * from "./user";

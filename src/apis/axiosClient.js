@@ -17,9 +17,7 @@ axiosClient.interceptors.response.use(
       throw error;
     }
     if (error.response) {
-      if (error.response.status === 401) {
-        // history.push("/login");
-        // clearAuth();
+      if (error.response.status === 401 || error.response.status === 400) {
       }
     }
     return Promise.reject(error);

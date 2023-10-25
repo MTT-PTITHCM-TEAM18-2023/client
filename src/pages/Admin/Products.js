@@ -8,7 +8,7 @@ import EnterProductForm from "src/components/organisms/admin/EnterProductForm";
 import axiosClient, { authHeaders } from "src/apis/axiosClient";
 import { toast } from "react-toastify";
 import EditProductForm from "src/components/organisms/admin/EditProductForm";
-import { updateProductApi } from "src/apis";
+import { updateProductApi, deleteProductApi } from "src/apis";
 
 const Products = () => {
   const [page, setPage] = useState(1);
@@ -57,9 +57,9 @@ const Products = () => {
       key: "isActive",
       render: (_, record) => (
         <Space size="middle">
-          <p onClick={() => showEnterModal(record)}>Nhập hàng</p>
-          <p onClick={() => showEditModal(record)}>Chỉnh sửa</p>
-          <p>Xóa</p>
+          <Button onClick={() => showEnterModal(record)}>Nhập hàng</Button>
+          <Button onClick={() => showEditModal(record)}>Chỉnh sửa</Button>
+          <Button onClick={() => handleDeleteProduct(record.id)}>Xóa</Button>
         </Space>
       ),
     },
@@ -91,7 +91,7 @@ const Products = () => {
   };
 
   const closeEditModal = () => {
-    setIsModalEnterOpen(false);
+    setIsModalEditOpen(false);
   };
   const handleCreateProduct = async (formValues) => {
     const dataTransfer = {
@@ -116,7 +116,7 @@ const Products = () => {
     const { id, ...data } = editingProduct;
     await updateProductApi(id, {
       ...data,
-      qty: formValues.qty,
+      qty: data.qty + formValues.qty,
     });
   };
 
@@ -126,11 +126,20 @@ const Products = () => {
     await updateProductApi(id, { ...data, ...formValues });
   };
 
+  const handleDeleteProduct = async (id) => {
+    console.log("id", id);
+    try {
+      await deleteProductApi(id);
+      dispatch(getProducts({ page }));
+      toast.success("Xóa sản phẩm thành công");
+    } catch {
+      toast.error("Xóa sản phẩm thất bại");
+    }
+  };
+
   return (
     <div>
-      <Button type="primary" onClick={showModal}>
-        Tạo sản phẩm
-      </Button>
+      <Button onClick={showModal}>+ Tạo sản phẩm</Button>
       {/* Motal create product */}
       <Modal
         title="Thông tin sản phẩm"
