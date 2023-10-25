@@ -1,47 +1,47 @@
-import { InputNumber, message } from "antd"
-import React, { useEffect, useState } from "react"
-import Col from "react-bootstrap/Col"
-import Container from "react-bootstrap/Container"
-import Row from "react-bootstrap/Row"
-import { useTranslation } from "react-i18next"
-import { useDispatch } from "react-redux"
-import { fetchProductDetail } from "../../apis/product"
-import ProductSeen from "../../components/ProductSeen"
-import history from "../../untils/history"
-import "./style.scss"
-import { addCart } from "../../store/cart"
+import { InputNumber, message } from "antd";
+import React, { useEffect, useState } from "react";
+import Col from "react-bootstrap/Col";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import { useTranslation } from "react-i18next";
+import { useDispatch } from "react-redux";
+import { fetchProductDetail } from "../../apis/product";
+import ProductSeen from "../../components/ProductSeen";
+import history from "../../common/utils/history";
+import "./style.scss";
+import { addCart } from "../../store/cart";
 
 function DetailProduct() {
   let formatter = new Intl.NumberFormat("en-US", {
     style: "currency",
     currency: "VND",
-  })
-  const { t } = useTranslation()
-  const dispatch = useDispatch()
-  const [quantity, setQuantity] = useState(1)
-  const idProduct = history.location.pathname.slice(10)
-  const [productDetail, setProductDetail] = useState(null)
+  });
+  const { t } = useTranslation();
+  const dispatch = useDispatch();
+  const [quantity, setQuantity] = useState(1);
+  const idProduct = history.location.pathname.slice(10);
+  const [productDetail, setProductDetail] = useState(null);
 
   useEffect(() => {
-    ;(async () => {
+    (async () => {
       try {
-        const resProductDetail = await fetchProductDetail(idProduct)
-        setProductDetail(resProductDetail?.data?.data)
+        const resProductDetail = await fetchProductDetail(idProduct);
+        setProductDetail(resProductDetail?.data?.data);
       } catch (error) {
-        console.log("error:", error)
+        console.log("error:", error);
       }
-    })()
-  }, [dispatch, idProduct])
+    })();
+  }, [dispatch, idProduct]);
 
   const onChangeQuantity = (value) => {
-    setQuantity(value)
-  }
+    setQuantity(value);
+  };
 
   const handleSubmit = (e) => {
-    e.preventDefault()
-    dispatch(addCart({ data: productDetail, order: quantity }))
-    message.success("Add product successfully!")
-  }
+    e.preventDefault();
+    dispatch(addCart({ data: productDetail, order: quantity }));
+    message.success("Đã thêm sản phẩm vào giỏ!");
+  };
 
   return (
     <>
@@ -113,7 +113,7 @@ function DetailProduct() {
         </Row>
       </Container>
     </>
-  )
+  );
 }
 
-export default DetailProduct
+export default DetailProduct;

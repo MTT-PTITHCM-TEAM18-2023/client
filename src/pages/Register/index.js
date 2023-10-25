@@ -49,7 +49,7 @@ function Register(props) {
   const user = useSelector((state) => state.user);
 
   useEffect(() => {
-    if (!user.isRegister && user.errorRegisterMessage) {
+    if (!user?.isRegister && user?.errorRegisterMessage) {
       message.warning(user.errorRegisterMessage);
     }
     user.isRegister && message.success("Register success");

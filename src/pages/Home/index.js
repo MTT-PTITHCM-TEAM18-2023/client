@@ -1,73 +1,76 @@
-import { Pagination } from "antd"
-import queryString from "query-string"
-import React, { useEffect, useMemo, useState } from "react"
-import Col from "react-bootstrap/Col"
-import Container from "react-bootstrap/Container"
-import Row from "react-bootstrap/Row"
-import { useTranslation } from "react-i18next"
-import { useHistory, useLocation } from "react-router-dom"
-import "swiper/components/navigation/navigation.min.css"
-import "swiper/components/pagination/pagination.min.css"
-import "swiper/swiper.min.css"
-import { fetchCategory } from "../../apis/category"
-import { fetchProducts } from "../../apis/product"
-import ProductList from "../../components/ProductList"
-import "./style.scss"
+import { Pagination } from "antd";
+import queryString from "query-string";
+import React, { useEffect, useMemo, useState } from "react";
+import Col from "react-bootstrap/Col";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import { useTranslation } from "react-i18next";
+import { useHistory, useLocation } from "react-router-dom";
+import "swiper/components/navigation/navigation.min.css";
+import "swiper/components/pagination/pagination.min.css";
+import "swiper/swiper.min.css";
+import { fetchCategory } from "../../apis/category";
+import { fetchProducts } from "../../apis/product";
+import ProductList from "../../components/ProductList";
+import "./style.scss";
 
 function HomePage() {
-  const { t } = useTranslation()
-  const [products, setProducts] = useState([])
-  const [meta, setMeta] = useState({ page: 1, total: 0 })
-  const [category, setCategory] = useState([])
-  const params = useLocation()
-  const history = useHistory()
+  const { t } = useTranslation();
+  const [products, setProducts] = useState([]);
+  const [page, setPage] = useState(1);
+  const [total, setTotal] = useState(0);
+  const [category, setCategory] = useState([]);
+  const [pageSize, setPageSize] = useState(12);
+  const params = useLocation();
+  const history = useHistory();
   const query = useMemo(
     () => queryString.parse(params?.search),
     [params?.search]
-  )
+  );
 
   useEffect(() => {
-    ;(async () => {
+    (async () => {
       try {
-        const resCategory = await fetchCategory({ limit: 30 })
-        setCategory(resCategory?.data?.data?.items)
+        const resCategory = await fetchCategory({ limit: 30 });
+        setCategory(resCategory?.data?.data?.items);
       } catch (error) {
-        console.log("error:", error)
+        console.log("error:", error);
       }
-    })()
-  }, [])
+    })();
+  }, []);
 
   useEffect(() => {
-    ;(async () => {
+    (async () => {
       try {
         const resProduct = await fetchProducts({
-          page: query?.page || 1,
-          limit: 12,
+          page: page,
+          limit: pageSize,
           cat: query?.category,
-        })
-        setProducts(resProduct?.data?.data?.items)
-        setMeta((pre) => ({
-          ...pre,
-          page: resProduct?.data?.data?.meta?.currentPage,
-          total: resProduct?.data?.data?.meta?.totalItems,
-        }))
+        });
+        setProducts(resProduct?.data?.data?.items);
+        setTotal(resProduct?.data?.data?.meta?.totalItems);
       } catch (error) {
-        console.log("error:", error)
+        console.log("error:", error);
       }
-    })()
-  }, [query])
+    })();
+  }, [page, pageSize, query]);
 
   const onChange = (page) => {
-    history.push(`?page=${page}`)
-  }
+    history.push(`?page=${page}`);
+  };
 
   const handleSelectCategory = (id) => {
     if (+query?.category === +id) {
-      history.push("/")
+      history.push("/");
     } else {
-      history.push(`?category=${id}`)
+      history.push(`?category=${id}`);
     }
-  }
+  };
+
+  const handleChangePageSize = (current, size) => {
+    setPageSize(size);
+    setPage(1);
+  };
 
   return (
     <div className="page-home">
@@ -90,7 +93,7 @@ function HomePage() {
                     <p className="text-gray-400">{t(item.description)}</p>
                   </div>
                 </Col>
-              )
+              );
             })}
           </Row>
         </section>
@@ -105,23 +108,27 @@ function HomePage() {
               Danh sách sản phẩm
             </h2>
             <p className="product-area__header__desc">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias
-              possimus totam culpa. Nulla, dolores repellat ipsa sunt voluptates
-              quidem voluptatum.
+              Không chỉ là sản phẩm nội thất đơn thuần, mà còn là không gian
+              sống theo phong cách riêng với cách bày trí hài hòa từ đồ nội thất
+              kết hợp với đồ trang trí. Giúp khách hàng cảm nhận được một không
+              gian sống thực sự, cảm thấy thoải mái để tận hưởng cuộc sống.
             </p>
           </div>
           <ProductList data={products} xl={3} />
           <div className="flex justify-center">
             <Pagination
-              current={meta.page}
+              pageSize={pageSize}
+              total={total}
+              current={page}
+              pageSizeOptions={[4, 12, 20]}
               onChange={onChange}
-              total={meta.total}
+              onShowSizeChange={handleChangePageSize}
             />
           </div>
         </Container>
       </section>
     </div>
-  )
+  );
 }
 
-export default HomePage
+export default HomePage;

@@ -1,25 +1,35 @@
-import React, { useEffect, useRef, useState } from "react"
-import Container from "react-bootstrap/Container"
-import { useDispatch, useSelector } from "react-redux"
-import { Link } from "react-router-dom"
-import { getCart } from "../../store/cart"
-import BoxSearch from "../BoxSearch"
-import "./style.scss"
+import React, { useEffect, useRef, useState } from "react";
+import Container from "react-bootstrap/Container";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { getCart } from "../../store/cart";
+import BoxSearch from "../BoxSearch";
+import "./style.scss";
 
 function Header() {
-  const dispatch = useDispatch()
-  const cart = useSelector((state) => state?.cart)
-  const [keySearch, setKeySearch] = useState()
-  const inputSearch = useRef(null)
+  const dispatch = useDispatch();
+  const cart = useSelector((state) => state?.cart);
+  const [keySearch, setKeySearch] = useState();
+  const inputSearch = useRef(null);
+  const [isShowSearchBar, setIsShowSearchBar] = useState(false);
 
   useEffect(() => {
-    dispatch(getCart())
-  }, [dispatch])
+    dispatch(getCart());
+  }, [dispatch]);
 
   const handleSearchProduct = (e) => {
     // dispatch(getKeySearch(e.target.value));
-    setKeySearch(e.target.value)
-  }
+    setKeySearch(e.target.value);
+  };
+
+  const handleToggleSearchBar = () => {
+    setIsShowSearchBar((prev) => !prev);
+  };
+
+  const handleClearSearch = () => {
+    inputSearch.current = "";
+    setKeySearch("");
+  };
 
   return (
     <>
@@ -39,10 +49,7 @@ function Header() {
               <button
                 className="btn btn-primary btn--search-header"
                 type="button"
-                data-toggle="collapse"
-                data-target="#collapseExample"
-                aria-expanded="false"
-                aria-controls="collapseExample"
+                onClick={handleToggleSearchBar}
               >
                 <i className="fas fa-search"></i>
               </button>
@@ -50,26 +57,32 @@ function Header() {
           </div>
         </Container>
       </div>
-      <div
-        ref={inputSearch}
-        className="collapse header__search"
-        id="collapseExample"
-      >
-        <Container>
-          <input
-            type="email"
-            className="form-control"
-            id="exampleInputEmail1"
-            aria-describedby="emailHelp"
-            placeholder="Search Here"
-            onChange={handleSearchProduct}
-            value={keySearch}
-          />
-        </Container>
-      </div>
+      {isShowSearchBar && (
+        <div ref={inputSearch} className="header__search">
+          <Container>
+            <div className="flex justify-between items-center">
+              <input
+                type="string"
+                className="flex-1"
+                placeholder="Tìm kiếm sản phẩm"
+                onChange={handleSearchProduct}
+                value={keySearch}
+              />
+              <div
+                className="block h-8 w-8 cursor-pointer"
+                onClick={handleClearSearch}
+              >
+                <p className="text-white text-2xl">
+                  <i className="fas fa-backspace"></i>
+                </p>
+              </div>
+            </div>
+          </Container>
+        </div>
+      )}
       <BoxSearch keySearch={keySearch} inputSearch={inputSearch.current} />
     </>
-  )
+  );
 }
 
-export default Header
+export default Header;

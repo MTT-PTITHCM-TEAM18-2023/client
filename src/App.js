@@ -7,7 +7,7 @@ import AdminLayout from "./layouts/Admin/AdminLayout";
 import routersUser from "./routers/userRouter";
 import "./style/styles.scss";
 
-import history from "./untils/history";
+import history from "./common/utils/history";
 
 function App() {
   const showRouterUser = (routers) => {

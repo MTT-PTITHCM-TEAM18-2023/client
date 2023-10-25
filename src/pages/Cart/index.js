@@ -7,34 +7,34 @@ import {
   Popconfirm,
   Space,
   Table,
-} from "antd"
-import React, { useEffect, useState } from "react"
-import { Col, Container, Row } from "react-bootstrap"
-import { useTranslation } from "react-i18next"
-import { useDispatch, useSelector } from "react-redux"
-import { Link } from "react-router-dom"
-import { checkoutSendOTP, checkoutVerify, placeOrder } from "../../apis/user"
-import ProductSeen from "../../components/ProductSeen"
-import { deleteCart, updateCart } from "../../store/cart"
-import history from "../../untils/history"
-import ShowBill from "./ShowBill"
-import "./style.scss"
+} from "antd";
+import React, { useEffect, useState } from "react";
+import { Col, Container, Row } from "react-bootstrap";
+import { useTranslation } from "react-i18next";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { checkoutSendOTP, checkoutVerify, placeOrder } from "../../apis/user";
+import ProductSeen from "../../components/ProductSeen";
+import { deleteCart, updateCart } from "../../store/cart";
+import history from "../../common/utils/history";
+import ShowBill from "./ShowBill";
+import "./style.scss";
 
 const formatter = new Intl.NumberFormat("en-US", {
   style: "currency",
   currency: "VND",
-})
+});
 function CartPage() {
-  const { t } = useTranslation()
-  const cart = useSelector((state) => state?.cart)
-  const [data, setData] = useState([])
-  const dispatch = useDispatch()
+  const { t } = useTranslation();
+  const cart = useSelector((state) => state?.cart);
+  const [data, setData] = useState([]);
+  const dispatch = useDispatch();
   const [pagination, setPagination] = useState({
     current: 1,
     pageSize: 4,
-  })
-  const [listOrder, setListOrder] = useState([])
-  const [totalMoneyListOrder, setTotalMoneyListOrder] = useState(0)
+  });
+  const [listOrder, setListOrder] = useState([]);
+  const [totalMoneyListOrder, setTotalMoneyListOrder] = useState(0);
   const [infoUser, setInfoUser] = useState({
     email: "",
     code: "",
@@ -42,8 +42,8 @@ function CartPage() {
     phone: "",
     address: "",
     listOrder: [],
-  })
-  const [loading, setLoading] = useState(false)
+  });
+  const [loading, setLoading] = useState(false);
 
   const columns = [
     {
@@ -85,10 +85,10 @@ function CartPage() {
             max={quantity}
             defaultValue={order}
             onChange={(value) => {
-              updateQuantityCartItem({ index, order: value })
+              updateQuantityCartItem({ index, order: value });
             }}
           />
-        )
+        );
       },
       colSpan: 1,
     },
@@ -106,7 +106,7 @@ function CartPage() {
           <Popconfirm
             title={t("cartPage.messageDeleteProduct")}
             onConfirm={() => {
-              handleDeleteCartItem(index)
+              handleDeleteCartItem(index);
             }}
             okText="Yes"
             cancelText="No"
@@ -116,7 +116,7 @@ function CartPage() {
         </Space>
       ),
     },
-  ]
+  ];
 
   useEffect(() => {
     setData(
@@ -137,71 +137,71 @@ function CartPage() {
         total: item.order * item.price,
         action: index,
       }))
-    )
-  }, [cart])
+    );
+  }, [cart]);
 
   const rowSelection = {
     onChange: (_, selectedRows) => {
       let total = selectedRows.reduce((totalNow, item) => {
-        return totalNow + item.total
-      }, 0)
-      setTotalMoneyListOrder(total)
+        return totalNow + item.total;
+      }, 0);
+      setTotalMoneyListOrder(total);
       const dataOrder = selectedRows.map((item) => ({
         product_id: item?.product?.id,
         qty: item?.order?.order,
-      }))
-      setInfoUser((pre) => ({ ...pre, listOrder: dataOrder }))
-      setListOrder(selectedRows)
+      }));
+      setInfoUser((pre) => ({ ...pre, listOrder: dataOrder }));
+      setListOrder(selectedRows);
     },
-  }
+  };
 
   function updateQuantityCartItem({ order, index }) {
-    dispatch(updateCart({ index, order }))
+    dispatch(updateCart({ index, order }));
   }
 
   function handleDeleteCartItem(index) {
-    dispatch(deleteCart([index]))
-    message.success("Xóa sản phẩm thành công")
+    dispatch(deleteCart([index]));
+    message.success("Xóa sản phẩm thành công");
   }
 
   function handleTableChange(pagination) {
-    setPagination(pagination)
+    setPagination(pagination);
     window.scrollTo({
       top: 100,
       left: 100,
       behavior: "smooth",
-    })
+    });
   }
 
   const handleGetCode = async () => {
     if (infoUser.email) {
-      checkoutSendOTP({ email: infoUser.email })
-      message.success("Mã code đã được gửi về mail: " + infoUser.email)
+      checkoutSendOTP({ email: infoUser.email });
+      message.success("Mã code đã được gửi về mail: " + infoUser.email);
     } else {
-      message.error("Vui lòng nhập mail và gửi lại")
+      message.error("Vui lòng nhập mail và gửi lại");
     }
-  }
+  };
 
   const handleCheckout = async () => {
     try {
-      setLoading(true)
+      setLoading(true);
       if (!listOrder.length) {
-        message.error("Vui lòng chọn sản phẩm")
-        return
+        message.error("Vui lòng chọn sản phẩm");
+        return;
       }
       const resCheckoutVerify = await checkoutVerify({
         email: infoUser.email,
         code: infoUser.code,
-      })
+      });
       if (resCheckoutVerify?.data?.status === "ERROR") {
-        message.error(resCheckoutVerify?.data?.message)
-        return
+        message.error(resCheckoutVerify?.data?.message);
+        return;
       }
       if (resCheckoutVerify?.data?.status === "OK") {
         localStorage.setItem(
           "authentication_token",
           resCheckoutVerify.data?.data?.jwt
-        )
+        );
         const res = await placeOrder({
           items: infoUser.listOrder,
           customer: {
@@ -209,23 +209,23 @@ function CartPage() {
             name: infoUser.name,
             address: infoUser.address,
           },
-        })
+        });
         if (res.data?.status === "OK") {
-          message.success("Bạn đã đặt hàng thành công")
-          history.push("/")
-          const indexOrder = listOrder.map((item) => item?.order?.index)
-          console.log("indexOrder:", indexOrder)
-          dispatch(deleteCart(indexOrder))
+          message.success("Bạn đã đặt hàng thành công");
+          history.push("/");
+          const indexOrder = listOrder.map((item) => item?.order?.index);
+          console.log("indexOrder:", indexOrder);
+          dispatch(deleteCart(indexOrder));
         } else {
-          res.error(resCheckoutVerify?.data?.message)
+          res.error(resCheckoutVerify?.data?.message);
         }
       }
     } catch (error) {
-      console.log("error:", error)
+      console.log("error:", error);
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }
+  };
 
   return (
     <div className="cart-page mt-50">
@@ -382,7 +382,7 @@ function CartPage() {
         </Row>
       </Container>
     </div>
-  )
+  );
 }
 
-export default CartPage
+export default CartPage;

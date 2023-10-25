@@ -1,39 +1,13 @@
-// import {
-//   adminHomeURL,
-//   adminProductURL,
-//   adminUserURL,
-// } from "../constants/baseURL";
-// import HomeAdminPage from "../pages/Admin/Home";
-// import ProductAdminPage from "../pages/Admin/Product";
-// import UserAdminPage from "../pages/Admin/User";
-
-// const router = [
-//   {
-//     path: adminHomeURL,
-//     exact: true,
-//     main: <HomeAdminPage />,
-//   },
-//   {
-//     path: adminProductURL,
-//     exact: false,
-//     main: <ProductAdminPage />,
-//   },
-//   {
-//     path: adminUserURL,
-//     exact: false,
-//     main: <UserAdminPage />,
-//   },
-// ];
-
-// export default router;
-
 import Dashboard from "../pages/Admin/Dashboard";
 import UserProfile from "../pages/Admin/UserProfile";
 import TableList from "../pages/Admin/TableList";
+import Products from "../pages/Admin/Products";
+import Category from "../pages/Admin/Category";
 
 const adminRoutes = [
   {
     path: "/dashboard",
+    absolute: true,
     name: "Dashboard",
     icon: "nc-icon nc-chart-pie-35",
     component: Dashboard,
@@ -51,6 +25,20 @@ const adminRoutes = [
     name: "Table List",
     icon: "nc-icon nc-notes",
     component: TableList,
+    layout: "/admin",
+  },
+  {
+    path: "/products",
+    name: "Product List",
+    icon: "nc-icon nc-notes",
+    component: Products,
+    layout: "/admin",
+  },
+  {
+    path: "/category",
+    name: "Category List",
+    icon: "nc-icon nc-single-copy-04",
+    component: Category,
     layout: "/admin",
   },
 ];

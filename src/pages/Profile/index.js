@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 //   updateProfileUser,
 // } from "../../actions/user";
 import { homeURL } from "../../constants/baseURL";
-import history from "../../untils/history";
+import history from "../../common/utils/history";
 import ListOrdered from "./ListOrdered";
 import "./style.scss";
 const { Option } = Select;

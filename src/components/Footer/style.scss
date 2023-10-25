@@ -11,9 +11,6 @@
       margin-top: 50px;
     }
   }
-  h2 {
-    color: $white;
-  }
   p {
     color: $silver;
   }
@@ -50,7 +47,8 @@
     &__item {
       margin-right: 24px;
       a {
-        color: $white;
+        color: $black;
+        font-size: large;
         &:hover {
           color: $color-primary;
         }

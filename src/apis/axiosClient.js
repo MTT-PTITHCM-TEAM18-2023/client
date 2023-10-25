@@ -1,6 +1,6 @@
 import axios from "axios";
 import queryString from "query-string";
-import { baseURL } from "./../constants/baseURL";
+import { baseURL } from "src/constants/baseURL";
 
 //set up default config for http requests here
 const axiosClient = axios.create({
@@ -26,18 +26,18 @@ axiosClient.interceptors.response.use(
   }
 );
 
-function authHeaders() {
-  const token = localStorage.getItem("authentication_token")
+export function authHeaders() {
+  const token = localStorage.getItem("authentication_token");
   const headers = {
     Authorization: "beare " + token,
     Accept: "application/json",
     "Accept-Language": "vi",
-  }
-  return headers
+  };
+  return headers;
 }
 
 export async function authGet(url, params) {
-  return await axiosClient.get(url, { params }, { headers: authHeaders() })
+  return await axiosClient.get(url, { params }, { headers: authHeaders() });
 }
 
 export async function authPut(url, params = {}) {

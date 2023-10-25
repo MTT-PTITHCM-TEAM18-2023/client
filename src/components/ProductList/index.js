@@ -13,13 +13,13 @@ const showProduct = (data = [], xl) => {
       <Col xl={xl} key={item.id}>
         <ProductItem data={item} />
       </Col>
-    )
-  })
-}
+    );
+  });
+};
 
 function ProductList(props) {
-  const showLoading = useSelector((state) => state.ui?.showLoading)
-  const { data = [], xl } = props
+  const showLoading = useSelector((state) => state.ui?.showLoading);
+  const { data = [], xl } = props;
   return (
     <>
       {showLoading ? (
@@ -36,7 +36,7 @@ function ProductList(props) {
         </Row>
       )}
     </>
-  )
+  );
 }
 
 export default ProductList;

@@ -29,17 +29,17 @@ function Footer(props) {
         <Row>
           <Col xl={3} sm={12}>
             <div className="footer__item">
-              <h2>About Us</h2>
+              <h2 className="text-black">About</h2>
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                eiusmod tempor incididunt ut labore dolore magna aliqua.
+                Hãy để lại email của bạn để nhận được những ý tưởng trang trí
+                mới và những thông tin, ưu đãi từ KARMA
               </p>
             </div>
           </Col>
           <Col xl={3} sm={12}>
             <div className="footer__item">
-              <h2>Newsletter</h2>
-              <p>Stay update with our latest</p>
+              <h2 className="text-black">Newsletter</h2>
+              <p>Kết nối với KARMA</p>
               <div className="input-group mb-3 footer__search">
                 <input
                   type="text"
@@ -58,7 +58,7 @@ function Footer(props) {
           </Col>
           <Col xl={3} sm={12}>
             <div className="footer__item">
-              <h2>Instragram Feed</h2>
+              <h2 className="text-black">Thông tin</h2>
               <div className="footer__list-img">
                 {listImgFoolter.map((item, index) => {
                   return (
@@ -78,7 +78,9 @@ function Footer(props) {
                 {socialIcon.map((item, index) => {
                   return (
                     <li className="footer__social__item" key={index}>
-                      <a href="#1">{item}</a>
+                      <a href="#1" className="text-orange-500">
+                        {item}
+                      </a>
                     </li>
                   );
                 })}
