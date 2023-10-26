@@ -2,10 +2,11 @@ import React, { useEffect, useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { Button, Select, Form, Input, Upload } from "antd";
+import { Button, Select, Form, Input, Upload, message } from "antd";
 
 import { getSupplier, fetchCategory } from "src/apis";
 import { parseBase64 } from "src/common/utils/parseBase64";
+import { toast } from "react-toastify";
 
 const createProductSchema = yup
   .object({
@@ -63,6 +64,11 @@ const EditProductForm = ({ editeProduct, onSubmit }) => {
   };
 
   const handleChangeImage = async (file) => {
+    const fsize = file?.size;
+    if (fsize && fsize / 1024 >= 4096) {
+      message.error("Fize size too big");
+      return true;
+    }
     const url = await parseBase64(file);
     setImageUrl(url);
     return false;
@@ -107,7 +113,9 @@ const EditProductForm = ({ editeProduct, onSubmit }) => {
             render={({ field }) => <Input {...field} />}
           />
           {errors.name && (
-            <span style={{ color: "red" }}>{errors.name.message}</span>
+            <span style={{ color: "red" }}>
+              {errors.name?.message ?? "Vui lòng nhập tên sản phẩm"}
+            </span>
           )}
         </Form.Item>
 
@@ -124,7 +132,7 @@ const EditProductForm = ({ editeProduct, onSubmit }) => {
             )}
           />
           {errors.name && (
-            <span style={{ color: "red" }}>{errors.name.message}</span>
+            <span style={{ color: "red" }}>{errors.description?.message}</span>
           )}
         </Form.Item>
 
@@ -135,7 +143,7 @@ const EditProductForm = ({ editeProduct, onSubmit }) => {
             render={({ field }) => <Input type="number" min={0} {...field} />}
           />
           {errors.name && (
-            <span style={{ color: "red" }}>{errors.price.message}</span>
+            <span style={{ color: "red" }}>{errors.price?.message}</span>
           )}
         </Form.Item>
 
@@ -155,7 +163,7 @@ const EditProductForm = ({ editeProduct, onSubmit }) => {
             render={({ field }) => <Input {...field} />}
           />
           {errors.name && (
-            <span style={{ color: "red" }}>{errors.unit.message}</span>
+            <span style={{ color: "red" }}>{errors.unit?.message}</span>
           )}
         </Form.Item>
 
@@ -184,7 +192,7 @@ const EditProductForm = ({ editeProduct, onSubmit }) => {
             )}
           />
           {errors.categoryId && (
-            <span style={{ color: "red" }}>{errors.categoryId.message}</span>
+            <span style={{ color: "red" }}>{errors.categoryId?.message}</span>
           )}
         </Form.Item>
 
@@ -213,7 +221,7 @@ const EditProductForm = ({ editeProduct, onSubmit }) => {
             )}
           />
           {errors.supplierId && (
-            <span style={{ color: "red" }}>{errors.supplierId.message}</span>
+            <span style={{ color: "red" }}>{errors.supplierId?.message}</span>
           )}
         </Form.Item>
 
@@ -233,7 +241,7 @@ const EditProductForm = ({ editeProduct, onSubmit }) => {
             )}
           />
           {errors.image && (
-            <span style={{ color: "red" }}>{errors.image.message}</span>
+            <span style={{ color: "red" }}>{errors.image?.message}</span>
           )}
         </Form.Item>
 

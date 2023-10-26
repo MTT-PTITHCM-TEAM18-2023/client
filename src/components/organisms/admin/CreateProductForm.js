@@ -2,10 +2,11 @@ import React, { useEffect, useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { Button, Select, Form, Input, Upload } from "antd";
+import { Button, Select, Form, Input, Upload, message } from "antd";
 
 import { getSupplier, fetchCategory } from "src/apis";
 import { parseBase64 } from "src/common/utils/parseBase64";
+import { toast } from "react-toastify";
 
 const createProductSchema = yup
   .object({
@@ -63,6 +64,11 @@ const CreateProductForm = ({ onSubmit }) => {
   };
 
   const handleChangeImage = async (file) => {
+    const fsize = file?.size;
+    if (fsize && fsize / 1024 >= 4096) {
+      message.error("Fize size too big");
+      return true;
+    }
     const url = await parseBase64(file);
     setImageUrl(url);
     return false;
@@ -107,7 +113,9 @@ const CreateProductForm = ({ onSubmit }) => {
             render={({ field }) => <Input {...field} />}
           />
           {errors.name && (
-            <span style={{ color: "red" }}>{errors.name.message}</span>
+            <span style={{ color: "red" }}>
+              {errors?.name?.message ?? "Vui lòng nhập tên sản phẩm"}
+            </span>
           )}
         </Form.Item>
 
@@ -124,7 +132,9 @@ const CreateProductForm = ({ onSubmit }) => {
             )}
           />
           {errors.description && (
-            <span style={{ color: "red" }}>{errors.description.message}</span>
+            <span style={{ color: "red" }}>
+              {errors?.description?.message ?? "Vui lòng nhập mô tả"}
+            </span>
           )}
         </Form.Item>
 
@@ -135,7 +145,9 @@ const CreateProductForm = ({ onSubmit }) => {
             render={({ field }) => <Input type="number" min={0} {...field} />}
           />
           {errors.name && (
-            <span style={{ color: "red" }}>{errors.price.message}</span>
+            <span style={{ color: "red" }}>
+              {errors?.price?.message ?? "Vui lòng nhập giá"}
+            </span>
           )}
         </Form.Item>
 
@@ -155,7 +167,9 @@ const CreateProductForm = ({ onSubmit }) => {
             render={({ field }) => <Input {...field} />}
           />
           {errors.name && (
-            <span style={{ color: "red" }}>{errors.unit.message}</span>
+            <span style={{ color: "red" }}>
+              {errors?.unit?.message ?? "Vui lòng nhập đơn vị"}
+            </span>
           )}
         </Form.Item>
 
@@ -184,7 +198,9 @@ const CreateProductForm = ({ onSubmit }) => {
             )}
           />
           {errors.categoryId && (
-            <span style={{ color: "red" }}>{errors.categoryId.message}</span>
+            <span style={{ color: "red" }}>
+              {errors?.categoryId?.message ?? "Vui lòng chọn Danh mục"}
+            </span>
           )}
         </Form.Item>
 
@@ -213,7 +229,9 @@ const CreateProductForm = ({ onSubmit }) => {
             )}
           />
           {errors.supplierId && (
-            <span style={{ color: "red" }}>{errors.supplierId.message}</span>
+            <span style={{ color: "red" }}>
+              {errors?.supplierId?.message ?? "Vui lòng chọn Nhà sản xuất"}
+            </span>
           )}
         </Form.Item>
 
@@ -233,7 +251,9 @@ const CreateProductForm = ({ onSubmit }) => {
             )}
           />
           {errors.image && (
-            <span style={{ color: "red" }}>{errors.image.message}</span>
+            <span style={{ color: "red" }}>
+              {errors?.image?.message ?? "Vui lòng nhập ảnh sản phẩm"}
+            </span>
           )}
         </Form.Item>
 

@@ -61,7 +61,9 @@ const CreateCategoryForm = ({ obSubmit }) => {
             render={({ field }) => <Input {...field} />}
           />
           {errors.name && (
-            <span style={{ color: "red" }}>{errors.name.message}</span>
+            <span style={{ color: "red" }}>
+              {errors?.name?.message ?? "Vui lòng nhập tên danh mục"}
+            </span>
           )}
         </Form.Item>
 
@@ -78,7 +80,9 @@ const CreateCategoryForm = ({ obSubmit }) => {
             )}
           />
           {errors.description && (
-            <span style={{ color: "red" }}>{errors.description.message}</span>
+            <span style={{ color: "red" }}>
+              {errors?.description?.message ?? "Vui lòng nhập mô tả danh mục"}
+            </span>
           )}
         </Form.Item>
 

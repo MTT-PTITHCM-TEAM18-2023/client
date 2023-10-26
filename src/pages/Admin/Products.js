@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { Image, Button, Modal, Space, Table, Tag } from "antd";
+import { Image, Button, Modal, Space, Table, Tag, message } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 
 import { getProducts } from "src/store";
 import CreateProductForm from "src/components/organisms/admin/CreateProductForm";
 import EnterProductForm from "src/components/organisms/admin/EnterProductForm";
 import axiosClient, { authHeaders } from "src/apis/axiosClient";
-import { toast } from "react-toastify";
 import EditProductForm from "src/components/organisms/admin/EditProductForm";
 import { updateProductApi, deleteProductApi } from "src/apis";
 
@@ -105,9 +104,9 @@ const Products = () => {
       });
       console.log("rés", res);
       closeModal();
-      toast.success("Tạo sản phẩm thành công");
-    } catch (error) {
-      console.log("error", error);
+      message.success("Tạo sản phẩm thành công");
+    } catch {
+      message.success("Tạo sản phẩm thất bại");
     }
   };
 
@@ -131,9 +130,9 @@ const Products = () => {
     try {
       await deleteProductApi(id);
       dispatch(getProducts({ page }));
-      toast.success("Xóa sản phẩm thành công");
+      message.success("Xóa sản phẩm thành công");
     } catch {
-      toast.error("Xóa sản phẩm thất bại");
+      message.error("Xóa sản phẩm thất bại");
     }
   };
 
