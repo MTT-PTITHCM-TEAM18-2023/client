@@ -10,8 +10,7 @@ import * as yup from "yup";
 import { Link, useHistory } from "react-router-dom";
 import "./style.scss";
 import { setUserMeta } from "src/store";
-import { loginService } from "src/apis";
-import { toast } from "react-toastify";
+import { loginService } from "src/services";
 
 const loginSchema = yup
   .object({
@@ -51,7 +50,7 @@ function Login() {
       const res = await loginService(values);
       localStorage.setItem("authentication_token", res.data.data.jwt);
       dispatch(setUserMeta(res.data));
-      toast.success(res.data.message);
+      message.success(res.data.message);
       history.push("/admin/dashboard");
     } catch {
       setError("password", {
@@ -66,15 +65,7 @@ function Login() {
       <div className="login-page mt-50">
         <Row>
           <Col xl={6}>
-            <div className="login-page__img">
-              <div className="login-page__img__content">
-                <h2>Chưa có tài khoản?</h2>
-                <Link to={"/register"} className="btn btn--primary">
-                  {" "}
-                  Đăng ký
-                </Link>
-              </div>
-            </div>
+            <div className="login-page__img"></div>
           </Col>
           <Col xl={6}>
             <div className="login-page__form">

@@ -4,9 +4,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { Button, Select, Form, Input, Upload, message } from "antd";
 
-import { getSupplier, fetchCategory } from "src/apis";
+import { getSupplier, fetchCategory } from "src/services";
 import { parseBase64 } from "src/common/utils/parseBase64";
-import { toast } from "react-toastify";
 
 const createProductSchema = yup
   .object({

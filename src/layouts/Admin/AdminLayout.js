@@ -1,24 +1,23 @@
-import React from "react";
-import { useLocation, Route, Switch } from "react-router-dom";
+import React from 'react';
+import { useLocation, Route, Switch, useHistory } from 'react-router-dom';
 
-import AdminNavbar from "../../components/AdminNavbar";
-import AdminFooter from "../../components/AdminFooter";
-import AdminSidebar from "../../components/AdminSidebar";
-import FixedPlugin from "../../components/FixedPlugin/index.js";
+import AdminNavbar from 'src/components/AdminNavbar';
+import AdminFooter from 'src/components/AdminFooter';
+import AdminSidebar from 'src/components/AdminSidebar';
 
-import routes from "../../routers/adminRouter";
+import routes from 'src/routers/adminRouter';
 
-import sidebarImage from "../../assets/images/sidebar-3.jpg";
+import sidebarImage from 'src/assets/images/sidebar-3.jpg';
 
 function Admin() {
-  const [image, setImage] = React.useState(sidebarImage);
-  const [color, setColor] = React.useState("black");
-  const [hasImage, setHasImage] = React.useState(true);
   const location = useLocation();
+  const history = useHistory();
+  const pathname = location.pathname;
+
   const mainPanel = React.useRef(null);
   const getRoutes = (routes) => {
     return routes.map((prop) => {
-      if (prop.layout === "/admin") {
+      if (prop.layout === '/admin') {
         return (
           <Route
             path={prop.layout + prop.path}
@@ -37,21 +36,24 @@ function Admin() {
     mainPanel.current.scrollTop = 0;
     if (
       window.innerWidth < 993 &&
-      document.documentElement.className.indexOf("nav-open") !== -1
+      document.documentElement.className.indexOf('nav-open') !== -1
     ) {
-      document.documentElement.classList.toggle("nav-open");
-      const element = document.getElementById("bodyClick");
+      document.documentElement.classList.toggle('nav-open');
+      const element = document.getElementById('bodyClick');
       element.parentNode.removeChild(element);
     }
   }, [location]);
+
+  React.useEffect(() => {
+    if (pathname === '/admin') {
+      history.push('/admin/dashboard');
+    }
+  }, [pathname]);
+
   return (
     <>
       <div className="wrapper">
-        <AdminSidebar
-          color={color}
-          image={hasImage ? image : ""}
-          routes={routes}
-        />
+        <AdminSidebar color={'black'} image={sidebarImage} routes={routes} />
         <div className="main-panel" ref={mainPanel}>
           <AdminNavbar />
           <div className="content">
@@ -60,14 +62,6 @@ function Admin() {
           <AdminFooter />
         </div>
       </div>
-      <FixedPlugin
-        hasImage={hasImage}
-        setHasImage={() => setHasImage(!hasImage)}
-        color={color}
-        setColor={(color) => setColor(color)}
-        image={image}
-        setImage={(image) => setImage(image)}
-      />
     </>
   );
 }

@@ -1,11 +1,12 @@
-import axios from "axios";
-import queryString from "query-string";
-import { baseURL } from "src/constants/baseURL";
+import axios from 'axios';
+import queryString from 'query-string';
+import { baseURL } from 'src/constants/baseURL';
 
 //set up default config for http requests here
 const axiosClient = axios.create({
   baseURL: baseURL,
   paramsSerializer: (params) => queryString.stringify(params),
+  headers: authHeaders(),
 });
 
 axiosClient.interceptors.response.use(
@@ -17,7 +18,8 @@ axiosClient.interceptors.response.use(
       throw error;
     }
     if (error.response) {
-      if (error.response.status === 401 || error.response.status === 400) {
+      if (error.response.status === 401 || error.response.status === 403) {
+        window.location.href = '/login';
       }
     }
     return Promise.reject(error);
@@ -25,17 +27,17 @@ axiosClient.interceptors.response.use(
 );
 
 export function authHeaders() {
-  const token = localStorage.getItem("authentication_token");
+  const token = localStorage.getItem('authentication_token');
   const headers = {
-    Authorization: "beare " + token,
-    Accept: "application/json",
-    "Accept-Language": "vi",
+    Authorization: 'beare ' + token,
+    Accept: 'application/json',
+    'Accept-Language': 'vi',
   };
   return headers;
 }
 
 export async function authGet(url, params) {
-  return await axiosClient.get(url, { params }, { headers: authHeaders() });
+  return await axiosClient.get(url, { params, headers: authHeaders() });
 }
 
 export async function authPut(url, params = {}) {
@@ -46,8 +48,9 @@ export async function authPatch(url, params = {}) {
   return await axiosClient.patch(url, params, { headers: authHeaders() });
 }
 
-export async function authPost(url, params = {}) {
-  return await axiosClient.post(url, params, { headers: authHeaders() });
+export async function authPost(url, params) {
+  console.log('params', params);
+  return await axiosClient.post(url, params);
 }
 
 export async function authDelete(url) {

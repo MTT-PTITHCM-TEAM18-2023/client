@@ -5,7 +5,7 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
-import { fetchProductDetail } from "../../apis/product";
+import { fetchProductDetail } from "../../services/product";
 import ProductSeen from "../../components/ProductSeen";
 import history from "../../common/utils/history";
 import "./style.scss";

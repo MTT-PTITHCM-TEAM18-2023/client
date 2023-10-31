@@ -13,7 +13,11 @@ import { Col, Container, Row } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { checkoutSendOTP, checkoutVerify, placeOrder } from "../../apis/user";
+import {
+  checkoutSendOTP,
+  checkoutVerify,
+  placeOrder,
+} from "../../services/user";
 import ProductSeen from "../../components/ProductSeen";
 import { deleteCart, updateCart } from "../../store/cart";
 import history from "../../common/utils/history";

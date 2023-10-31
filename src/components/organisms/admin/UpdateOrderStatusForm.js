@@ -1,19 +1,16 @@
-import React, { useEffect, useState } from "react";
-import { fetchOrderStatus } from "src/apis";
-import { Typography, List, Select, Space, Button } from "antd";
+import React, { useEffect, useState } from 'react';
+import { fetchOrderStatus } from 'src/services';
+import { Typography, List, Form, Select, Space, Button } from 'antd';
 
 const UpdateOrderStatusForm = ({ data, onSubmit }) => {
   const [orderStatus, setOrderStatus] = useState([]);
-  const [newStt, setNewStt] = useState(1);
+  const [newStt, setNewStt] = useState(() => data.order_status);
 
   useEffect(() => {
     (async () => {
       const resStatus = await fetchOrderStatus();
-      const data = resStatus.data.data.items;
-      setOrderStatus(data);
-      const stt = data.find((item) => item.name === data.order_status);
-      console.log("stt", stt);
-      stt && setNewStt(stt.id);
+      const dataRes = resStatus.data.data.items;
+      setOrderStatus(dataRes);
     })();
   }, [data.order_status]);
 
@@ -22,38 +19,57 @@ const UpdateOrderStatusForm = ({ data, onSubmit }) => {
   };
 
   const handleSubmit = () => {
-    onSubmit(newStt);
+    const stt = orderStatus.filter((item) => item.name == newStt);
+    stt[0] && onSubmit(stt[0].id);
   };
   return (
-    <Space>
-      <Typography>Chi tiết đơn hàng</Typography>
-      <List
-        itemLayout="horizontal"
-        dataSource={data.items}
-        renderItem={(item, index) => (
-          <List.Item>
-            <List.Item.Meta
-              title={item.name}
-              description={`${item.price} x ${item.qty}`}
-            />
-          </List.Item>
-        )}
-      />
-
-      <Typography>
-        Tổng tiền: {Number(data.total).toLocaleString("en") + " Đ"}
-      </Typography>
-
-      <br></br>
-      <Typography>Trạng thái</Typography>
-      <Select
-        defaultValue="lucy"
-        style={{ width: 120 }}
-        onChange={handleChange}
-        options={orderStatus.map((stt) => ({ value: stt.id, label: stt.name }))}
-      />
-      <Button onClick={handleSubmit}>Lưu</Button>
-    </Space>
+    <Form
+      onFinish={handleSubmit}
+      labelCol={{
+        span: 8,
+      }}
+      wrapperCol={{
+        span: 16,
+      }}
+      layout="horizontal"
+      style={{
+        maxWidth: 600,
+      }}
+    >
+      <Form.Item label="Chi tiết">
+        <List
+          itemLayout="horizontal"
+          dataSource={data.items}
+          style={{ maxHeight: '300px', overflow: 'scroll' }}
+          renderItem={(item) => (
+            <List.Item key={item.id}>
+              <List.Item.Meta
+                title={item.name}
+                description={`${item.price} x ${item.qty}`}
+              />
+            </List.Item>
+          )}
+        />
+      </Form.Item>
+      <Form.Item label="Tổng tiền">
+        <Typography>
+          {Number(data.total).toLocaleString('en') + ' Đ'}
+        </Typography>
+      </Form.Item>
+      <Form.Item label="Trạng thái">
+        <Select
+          defaultValue={newStt}
+          onChange={handleChange}
+          options={orderStatus.map((stt) => ({
+            value: stt.name,
+            label: stt.name,
+          }))}
+        />
+      </Form.Item>
+      <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
+        <Button htmlType="submit">Lưu</Button>
+      </Form.Item>
+    </Form>
   );
 };
 

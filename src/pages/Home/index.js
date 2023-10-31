@@ -9,8 +9,8 @@ import { useHistory, useLocation } from "react-router-dom";
 import "swiper/components/navigation/navigation.min.css";
 import "swiper/components/pagination/pagination.min.css";
 import "swiper/swiper.min.css";
-import { fetchCategory } from "../../apis/category";
-import { fetchProducts } from "../../apis/product";
+import { fetchCategory } from "../../services/category";
+import { fetchProducts } from "../../services/product";
 import ProductList from "../../components/ProductList";
 import "./style.scss";
 

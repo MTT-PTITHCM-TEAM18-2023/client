@@ -5,9 +5,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "src/store";
 import CreateProductForm from "src/components/organisms/admin/CreateProductForm";
 import EnterProductForm from "src/components/organisms/admin/EnterProductForm";
-import axiosClient, { authHeaders } from "src/apis/axiosClient";
+import axiosClient, { authHeaders } from "src/services/axiosClient";
 import EditProductForm from "src/components/organisms/admin/EditProductForm";
-import { updateProductApi, deleteProductApi } from "src/apis";
+import { updateProductApi, deleteProductApi } from "src/services";
 
 const Products = () => {
   const [page, setPage] = useState(1);

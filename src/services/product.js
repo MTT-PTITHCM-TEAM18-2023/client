@@ -1,10 +1,4 @@
-import {
-  authDelete,
-  authGet,
-  authPatch,
-  authPost,
-  authPut,
-} from "./axiosClient";
+import { authDelete, authGet, authPost, authPut } from "./axiosClient";
 
 export const fetchProductLatest = () => {
   const url = `/products?productLatest=true&_limit=8`;

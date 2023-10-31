@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { fetchOrders } from "src/apis";
+import { fetchOrders } from "src/services";
 
 const initialState = {
   list: [],

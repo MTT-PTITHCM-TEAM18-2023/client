@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Button, Modal, Space, Table } from "antd";
-import { fetchCategory, createCategory } from "src/apis";
+import { fetchCategory, createCategory } from "src/services";
 import CreateCategoryForm from "src/components/organisms/admin/CreateCategoryForm";
 
 const Category = () => {

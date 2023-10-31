@@ -1,13 +1,12 @@
 import React from "react";
 
-// const HomePage = React.lazy(() => import("./../pages/Home"));
-import HomePage from "./../pages/Home";
-import ProductsPage from "./../pages/Products";
-import DetailProduct from "./../pages/DetailProduct";
-import Login from "./../pages/Login";
-import Register from "./../pages/Register";
-import Cart from "./../pages/Cart";
-import Profile from "../pages/Profile";
+import HomePage from "src/pages/Home";
+import ProductsPage from "src/pages/Products";
+import DetailProduct from "src/pages/DetailProduct";
+import Login from "src/pages/Login";
+import Register from "src/pages/Register";
+import Cart from "src/pages/Cart";
+import Profile from "src/pages/Profile";
 import {
   cartURL,
   homeURL,
@@ -16,7 +15,7 @@ import {
   productsURL,
   profileURL,
   registerURL,
-} from "../constants/baseURL";
+} from "src/constants/baseURL";
 
 const routers = [
   {
