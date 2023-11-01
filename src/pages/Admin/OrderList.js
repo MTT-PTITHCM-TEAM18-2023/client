@@ -86,9 +86,13 @@ function OrderList() {
     console.log('id', id);
     try {
       if (currentOrder) {
-        await changeOrderStatus({ status_id: id, id: currentOrder.id });
+        const res = await changeOrderStatus({
+          status_id: id,
+          id: currentOrder.id,
+        });
+        console.log('res', res);
         dispatch(getOrders({ page, limit: 10 }));
-        message.success(MSG.UPDATE_STATUS_ORDER_SUCCESS);
+        message.success(MSG?.[res.data.message]);
       }
     } catch {
       message.error(MSG.UPDATE_STATUS_ORDER_FAILED);

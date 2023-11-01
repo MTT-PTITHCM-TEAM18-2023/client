@@ -15,6 +15,10 @@
           "mjs": "never"
         }
       ]
+    },
+    "globals": {
+      "window": true,
+      "document": true
     }
   }
   
