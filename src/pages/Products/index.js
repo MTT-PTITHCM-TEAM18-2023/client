@@ -1,52 +1,52 @@
-import React, { useEffect, useState } from "react";
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import CategoryProduct from "./CategoryProduct";
-import ColorProduct from "./ColorProduct";
-import SizeProduct from "./SizeProduct";
-import RatingProduct from "./RatingProduct";
-import { Select } from "antd";
-import "./style.scss";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useEffect, useState } from 'react';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import CategoryProduct from './CategoryProduct';
+import ColorProduct from './ColorProduct';
+import SizeProduct from './SizeProduct';
+import RatingProduct from './RatingProduct';
+import { Select } from 'antd';
+import './style.scss';
+import { useDispatch, useSelector } from 'react-redux';
 // import { getProductList } from "../../actions/product";
-import ProductList from "../../components/ProductList";
-import Pagination from "../../components/pagination";
+import ProductList from '../../components/ProductList';
+import Pagination from '../../components/pagination';
 // import {
 //   clearFilters,
 //   getPageLimitNumber,
 //   sortProduct,
 // } from "../../actions/control-action";
-import { useTranslation } from "react-i18next";
-import { Button } from "antd";
-import ProductSeen from "../../components/ProductSeen";
+import { useTranslation } from 'react-i18next';
+import { Button } from 'antd';
+import ProductSeen from '../../components/ProductSeen';
 
-function Products(props) {
-  const { Option } = Select
-  const { t } = useTranslation()
-  const filters = useSelector((state) => state.filters)
-  const hasFilter = filters.hasFilter
-  const listProduct = useSelector((state) => state.products.listProduct)
-  const [onSort, setOnsort] = useState("Sort Default")
-  const [onPage, setOnPage] = useState("Show 6")
+function Products() {
+  const { Option } = Select;
+  const { t } = useTranslation();
+  const filters = useSelector((state) => state.filters);
+  const hasFilter = filters.hasFilter;
+  const listProduct = useSelector((state) => state.products.listProduct);
+  const [onSort, setOnsort] = useState('Sort Default');
+  const [onPage, setOnPage] = useState('Show 6');
   const dispatch = useDispatch();
 
   useEffect(() => {
     // dispatch(getProductList(filters));
     if (hasFilter) {
-      setOnsort("Sort Default")
+      setOnsort('Sort Default');
       // dispatch(getPageLimitNumber({ limit: 6 }));
     }
-  }, [dispatch, filters, hasFilter])
+  }, [dispatch, filters, hasFilter]);
 
   function onChangeSort(value) {
     // dispatch(sortProduct(value.split(" ")));
-    setOnsort(value)
+    setOnsort(value);
   }
 
   function onChangeTotalItem(value) {
     // dispatch(getPageLimitNumber({ limit: +value }));
-    setOnPage(value)
+    setOnPage(value);
   }
 
   function handleClearFilter() {
@@ -61,25 +61,25 @@ function Products(props) {
             <div className="products-page__filter">
               <div className="products-page__filter__box">
                 <h2 className="products-page__filter__header">
-                  {t("productsPage.category")}
+                  {t('productsPage.category')}
                 </h2>
                 <CategoryProduct />
               </div>
               <div className="products-page__filter__box">
                 <h2 className="products-page__filter__header">
-                  {t("productsPage.size")}
+                  {t('productsPage.size')}
                 </h2>
                 <SizeProduct />
               </div>
               <div className="products-page__filter__box">
                 <h2 className="products-page__filter__header">
-                  {t("productsPage.color")}
+                  {t('productsPage.color')}
                 </h2>
                 <ColorProduct />
               </div>
               <div className="products-page__filter__box">
                 <h2 className="products-page__filter__header">
-                  {t("productsPage.rating")}
+                  {t('productsPage.rating')}
                 </h2>
                 <RatingProduct />
               </div>
@@ -136,7 +136,7 @@ function Products(props) {
         </Row>
       </Container>
     </div>
-  )
+  );
 }
 
 export default Products;

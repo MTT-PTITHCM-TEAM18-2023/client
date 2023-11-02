@@ -1,21 +1,21 @@
-import { Button, Checkbox, Form, Input, message } from "antd";
-import React, { useEffect } from "react";
-import Col from "react-bootstrap/Col";
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import { useDispatch, useSelector } from "react-redux";
-import { useForm, Controller } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
-import { Link, useHistory } from "react-router-dom";
-import "./style.scss";
-import { setUserMeta } from "src/store";
-import { loginService } from "src/services";
+import { Button, Checkbox, Form, Input, message } from 'antd';
+import React, { useEffect } from 'react';
+import Col from 'react-bootstrap/Col';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import { useDispatch, useSelector } from 'react-redux';
+import { useForm, Controller } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
+import { useHistory } from 'react-router-dom';
+import './style.scss';
+import { setUserMeta } from 'src/store';
+import { loginService } from 'src/services';
 
 const loginSchema = yup
   .object({
-    email: yup.string().required("Vui lòng nhập tên sản phẩm").email(),
-    password: yup.string().required("Vui lòng nhập mật khẩu"),
+    email: yup.string().required('Vui lòng nhập tên sản phẩm').email(),
+    password: yup.string().required('Vui lòng nhập mật khẩu'),
   })
   .required();
 
@@ -30,8 +30,8 @@ function Login() {
     setError,
   } = useForm({
     defaultValues: {
-      email: "",
-      password: "",
+      email: '',
+      password: '',
     },
     resolver: yupResolver(loginSchema),
   });
@@ -41,21 +41,21 @@ function Login() {
       message.warning(user.errorLoginMessage);
     }
     if (user.isLogin && user.succesLoginMessage) {
-      message.success("Login success");
+      message.success('Login success');
     }
   }, [user]);
 
   const onSubmit = async (values) => {
     try {
       const res = await loginService(values);
-      localStorage.setItem("authentication_token", res.data.data.jwt);
+      localStorage.setItem('authentication_token', res.data.data.jwt);
       dispatch(setUserMeta(res.data));
       message.success(res.data.message);
-      history.push("/admin/dashboard");
+      history.push('/admin/dashboard');
     } catch {
-      setError("password", {
-        type: "custom",
-        message: "Sai email hoặc mật khẩu",
+      setError('password', {
+        type: 'custom',
+        message: 'Sai email hoặc mật khẩu',
       });
     }
   };
@@ -87,7 +87,7 @@ function Login() {
                     render={({ field }) => <Input {...field} />}
                   />
                   {errors.email && (
-                    <span style={{ color: "red" }}>{errors.email.message}</span>
+                    <span style={{ color: 'red' }}>{errors.email.message}</span>
                   )}
                 </Form.Item>
 
@@ -98,7 +98,7 @@ function Login() {
                     render={({ field }) => <Input.Password {...field} />}
                   />
                   {errors.password && (
-                    <span style={{ color: "red" }}>
+                    <span style={{ color: 'red' }}>
                       {errors.password.message}
                     </span>
                   )}

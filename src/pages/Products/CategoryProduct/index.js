@@ -1,26 +1,26 @@
-import React, { useEffect, useRef, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useEffect, useRef, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 // import { getCategory } from "../../../actions/category";
 // import { getProductByCategory } from "../../../actions/control-action";
-import { useHistory } from "react-router-dom";
-import { productsURL } from "../../../constants/baseURL";
-import "./style.scss";
+import { useHistory } from 'react-router-dom';
+import { productsURL } from '../../../constants/baseURL';
+import './style.scss';
 
-function CategoryProduct(props) {
+function CategoryProduct() {
   const history = useHistory();
   let id = useRef(history.location.search.slice(1));
   const category = useSelector((state) => state.category);
   const hasFilter = useSelector((state) => state.filters.hasFilter);
   const dispatch = useDispatch();
   const [categoryItem, setCategoryItem] = useState({
-    name: "",
+    name: '',
     isActive: false,
   });
 
   useEffect(() => {
     // dispatch(getCategory());
     if (hasFilter) {
-      setCategoryItem({ id: "", isActive: false });
+      setCategoryItem({ id: '', isActive: false });
       id.current = null;
       history.push(productsURL);
     }
@@ -38,7 +38,7 @@ function CategoryProduct(props) {
     });
 
     id.current = value.id;
-    history.push(productsURL + "?" + value.id);
+    history.push(productsURL + '?' + value.id);
   };
 
   const showCategory = (data = []) => {
@@ -49,15 +49,15 @@ function CategoryProduct(props) {
           onClick={() => handleCheckCategory(item)}
           className={
             categoryItem.isActive && categoryItem.id === item.id
-              ? "active products-page__category__item"
-              : "products-page__category__item"
+              ? 'active products-page__category__item'
+              : 'products-page__category__item'
           }
         >
           {item.name}
         </li>
-      )
-    })
-  }
+      );
+    });
+  };
 
   return <ul className="products-page__category">{showCategory(category)}</ul>;
 }

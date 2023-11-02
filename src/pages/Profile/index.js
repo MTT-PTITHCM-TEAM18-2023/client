@@ -1,17 +1,17 @@
-import { Button, Form, Input, Select, message } from "antd";
-import React, { useEffect } from "react";
-import { Col, Container, Row } from "react-bootstrap";
-import { useTranslation } from "react-i18next";
-import { useDispatch, useSelector } from "react-redux";
+import { Button, Form, Input, Select, message } from 'antd';
+import React, { useEffect } from 'react';
+import { Col, Container, Row } from 'react-bootstrap';
+import { useTranslation } from 'react-i18next';
+import { useDispatch, useSelector } from 'react-redux';
 // import {
 //   getListPaymentUser,
 //   getProfileUserSuccess,
 //   updateProfileUser,
 // } from "../../actions/user";
-import { homeURL } from "../../constants/baseURL";
-import history from "../../common/utils/history";
-import ListOrdered from "./ListOrdered";
-import "./style.scss";
+import { homeURL } from '../../constants/baseURL';
+import history from '../../common/utils/history';
+import ListOrdered from './ListOrdered';
+import './style.scss';
 const { Option } = Select;
 const formItemLayout = {
   labelCol: {
@@ -44,12 +44,12 @@ const tailFormItemLayout = {
     },
   },
 };
-function Profile(props) {
+function Profile() {
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const [form] = Form.useForm();
-  const token = JSON.parse(localStorage.getItem("authentication_token"));
+  const token = JSON.parse(localStorage.getItem('authentication_token'));
   useEffect(() => {
     if (!token) {
       history.push(homeURL);
@@ -68,12 +68,12 @@ function Profile(props) {
       message.warning(user.errorUpdateProfileMessage);
     }
     if (user.isUpdated && user.messageUpdateSuccess) {
-      message.success("Update success");
+      message.success('Update success');
       // dispatch(getProfileUserSuccess({ messageUpdateSuccess: "" }));
     }
   }, [dispatch, form, user, token]);
 
-  const onFinish = (values) => {
+  const onFinish = () => {
     // dispatch(updateProfileUser({ data: values, idUser: user.id }));
   };
 
@@ -99,7 +99,7 @@ function Profile(props) {
                 src={
                   user?.avatar
                     ? user.avatar
-                    : "https://wallpaperaccess.com/full/114760.jpg"
+                    : 'https://wallpaperaccess.com/full/114760.jpg'
                 }
                 alt="imgPerson"
               />
@@ -107,28 +107,28 @@ function Profile(props) {
           </Col>
           <Col xl={8} sm={12}>
             <div className="profile-page__info">
-              <h2 className="text-center">{t("profilePage.title")}</h2>
+              <h2 className="text-center">{t('profilePage.title')}</h2>
               <Form
                 {...formItemLayout}
                 form={form}
                 name="updateProfile"
                 onFinish={onFinish}
                 initialValues={{
-                  prefix: "84",
+                  prefix: '84',
                 }}
                 scrollToFirstError
               >
                 <Form.Item
                   name="email"
-                  label={t("register.email")}
+                  label={t('register.email')}
                   rules={[
                     {
-                      type: "email",
-                      message: "The input is not valid E-mail!",
+                      type: 'email',
+                      message: 'The input is not valid E-mail!',
                     },
                     {
                       required: true,
-                      message: "Please input your E-mail!",
+                      message: 'Please input your E-mail!',
                     },
                   ]}
                   value={user.email}
@@ -138,55 +138,55 @@ function Profile(props) {
 
                 <Form.Item
                   name="password"
-                  label={t("register.password")}
+                  label={t('register.password')}
                   rules={[
                     {
                       required: true,
-                      message: "Please input your password!",
+                      message: 'Please input your password!',
                     },
                     {
                       min: 6,
-                      message: "Password should greater than 6!",
+                      message: 'Password should greater than 6!',
                     },
                   ]}
                   hasFeedback
                 >
                   <Input.Password />
                 </Form.Item>
-                <Form.Item name="fullName" label={t("register.fullName")}>
+                <Form.Item name="fullName" label={t('register.fullName')}>
                   <Input />
                 </Form.Item>
-                <Form.Item name="avatar" label={t("register.avatar")}>
+                <Form.Item name="avatar" label={t('register.avatar')}>
                   <Input />
                 </Form.Item>
                 <Form.Item
                   name="phone"
-                  label={t("register.phone")}
+                  label={t('register.phone')}
                   rules={[
                     {
                       required: true,
-                      message: "Please input your phone number!",
+                      message: 'Please input your phone number!',
                     },
                     {
                       len: 9,
-                      message: "Please input your phone number exact 9 number!",
+                      message: 'Please input your phone number exact 9 number!',
                     },
                   ]}
                 >
                   <Input
                     addonBefore={prefixSelector}
                     style={{
-                      width: "100%",
+                      width: '100%',
                     }}
                   />
                 </Form.Item>
                 <Form.Item
                   name="address"
-                  label={t("register.address")}
+                  label={t('register.address')}
                   rules={[
                     {
                       required: true,
-                      message: "Please input your address!",
+                      message: 'Please input your address!',
                     },
                   ]}
                 >
@@ -194,11 +194,11 @@ function Profile(props) {
                 </Form.Item>
                 <Form.Item
                   name="gender"
-                  label={t("register.gender")}
+                  label={t('register.gender')}
                   rules={[
                     {
                       required: true,
-                      message: "Please select gender!",
+                      message: 'Please select gender!',
                     },
                   ]}
                 >
@@ -215,7 +215,7 @@ function Profile(props) {
                     htmlType="submit"
                     className="btn btn--primary"
                   >
-                    {t("register.update")}
+                    {t('register.update')}
                   </Button>
                 </Form.Item>
               </Form>
@@ -225,7 +225,7 @@ function Profile(props) {
         <Row>
           <Col xl={12}>
             <div className="profile-page__list-ordered mt-50">
-              <h2>{t("profilePage.listOrder")}</h2>
+              <h2>{t('profilePage.listOrder')}</h2>
               <ListOrdered />
             </div>
           </Col>

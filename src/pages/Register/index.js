@@ -1,13 +1,13 @@
-import { Button, Checkbox, Form, Input, message, Select } from "antd";
-import React, { useEffect } from "react";
-import Col from "react-bootstrap/Col";
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import { useTranslation } from "react-i18next";
-import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Button, Checkbox, Form, Input, message, Select } from 'antd';
+import React, { useEffect } from 'react';
+import Col from 'react-bootstrap/Col';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import { useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 // import { userRegister } from "../../actions/user";
-import "./style.scss";
+import './style.scss';
 const { Option } = Select;
 
 const formItemLayout = {
@@ -42,7 +42,7 @@ const tailFormItemLayout = {
   },
 };
 
-function Register(props) {
+function Register() {
   // const dispatch = useDispatch();
   const { t } = useTranslation();
   const [form] = Form.useForm();
@@ -52,10 +52,10 @@ function Register(props) {
     if (!user?.isRegister && user?.errorRegisterMessage) {
       message.warning(user.errorRegisterMessage);
     }
-    user.isRegister && message.success("Register success");
+    user.isRegister && message.success('Register success');
   }, [user]);
 
-  const onFinish = (values) => {
+  const onFinish = () => {
     // dispatch(userRegister(values));
   };
 
@@ -78,39 +78,39 @@ function Register(props) {
           <Col xl={6}>
             <div className="login-page__img">
               <div className="login-page__img__content">
-                <h2>{t("register.titleImg")}</h2>
-                <p>{t("register.DescImg")}</p>
-                <Link to={"/login"} className="btn btn--primary">
-                  {" "}
-                  {t("register.loginBtn")}
+                <h2>{t('register.titleImg')}</h2>
+                <p>{t('register.DescImg')}</p>
+                <Link to={'/login'} className="btn btn--primary">
+                  {' '}
+                  {t('register.loginBtn')}
                 </Link>
               </div>
             </div>
           </Col>
           <Col xl={6}>
             <div className="login-page__form">
-              <h2>{t("register.title")}</h2>
+              <h2>{t('register.title')}</h2>
               <Form
                 {...formItemLayout}
                 form={form}
                 name="register"
                 onFinish={onFinish}
                 initialValues={{
-                  prefix: "84",
+                  prefix: '84',
                 }}
                 scrollToFirstError
               >
                 <Form.Item
                   name="email"
-                  label={t("register.email")}
+                  label={t('register.email')}
                   rules={[
                     {
-                      type: "email",
-                      message: "The input is not valid E-mail!",
+                      type: 'email',
+                      message: 'The input is not valid E-mail!',
                     },
                     {
                       required: true,
-                      message: "Please input your E-mail!",
+                      message: 'Please input your E-mail!',
                     },
                   ]}
                 >
@@ -119,15 +119,15 @@ function Register(props) {
 
                 <Form.Item
                   name="password"
-                  label={t("register.password")}
+                  label={t('register.password')}
                   rules={[
                     {
                       required: true,
-                      message: "Please input your password!",
+                      message: 'Please input your password!',
                     },
                     {
                       min: 6,
-                      message: "Password should greater than 6!",
+                      message: 'Password should greater than 6!',
                     },
                   ]}
                   hasFeedback
@@ -137,23 +137,23 @@ function Register(props) {
 
                 <Form.Item
                   name="confirm"
-                  label={t("register.confirmPassword")}
-                  dependencies={["password"]}
+                  label={t('register.confirmPassword')}
+                  dependencies={['password']}
                   hasFeedback
                   rules={[
                     {
                       required: true,
-                      message: "Please confirm your password!",
+                      message: 'Please confirm your password!',
                     },
                     ({ getFieldValue }) => ({
                       validator(_, value) {
-                        if (!value || getFieldValue("password") === value) {
+                        if (!value || getFieldValue('password') === value) {
                           return Promise.resolve();
                         }
 
                         return Promise.reject(
                           new Error(
-                            "The two passwords that you entered do not match!"
+                            'The two passwords that you entered do not match!'
                           )
                         );
                       },
@@ -165,32 +165,32 @@ function Register(props) {
 
                 <Form.Item
                   name="phone"
-                  label={t("register.phone")}
+                  label={t('register.phone')}
                   rules={[
                     {
                       required: true,
-                      message: "Please input your phone number!",
+                      message: 'Please input your phone number!',
                     },
                     {
                       len: 9,
-                      message: "Please input your phone number exact 9 number!",
+                      message: 'Please input your phone number exact 9 number!',
                     },
                   ]}
                 >
                   <Input
                     addonBefore={prefixSelector}
                     style={{
-                      width: "100%",
+                      width: '100%',
                     }}
                   />
                 </Form.Item>
                 <Form.Item
                   name="address"
-                  label={t("register.address")}
+                  label={t('register.address')}
                   rules={[
                     {
                       required: true,
-                      message: "Please input your address!",
+                      message: 'Please input your address!',
                     },
                   ]}
                 >
@@ -198,11 +198,11 @@ function Register(props) {
                 </Form.Item>
                 <Form.Item
                   name="gender"
-                  label={t("register.gender")}
+                  label={t('register.gender')}
                   rules={[
                     {
                       required: true,
-                      message: "Please select gender!",
+                      message: 'Please select gender!',
                     },
                   ]}
                 >
@@ -222,15 +222,15 @@ function Register(props) {
                         value
                           ? Promise.resolve()
                           : Promise.reject(
-                              new Error("Should accept agreement")
+                              new Error('Should accept agreement')
                             ),
                     },
                   ]}
                   {...tailFormItemLayout}
                 >
                   <Checkbox>
-                    {t("register.agreement1")}{" "}
-                    <a href="#1">{t("register.agreement2")}</a>
+                    {t('register.agreement1')}{' '}
+                    <a href="#1">{t('register.agreement2')}</a>
                   </Checkbox>
                 </Form.Item>
                 <Form.Item {...tailFormItemLayout}>
@@ -239,7 +239,7 @@ function Register(props) {
                     htmlType="submit"
                     className="btn btn--primary"
                   >
-                    {t("register.register")}
+                    {t('register.register')}
                   </Button>
                 </Form.Item>
               </Form>

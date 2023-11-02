@@ -1,16 +1,15 @@
-import React, { useState } from "react";
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useState } from 'react';
+import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 // import { getRatingProduct } from "../../../actions/control-action";
-import ShowStar from "./../../../components/ShowStar";
-import "./style.scss";
+import ShowStar from './../../../components/ShowStar';
+import './style.scss';
 
-function RatingProduct(props) {
-  const dispatch = useDispatch();
+function RatingProduct() {
   const hasFilter = useSelector((state) => state.filters.hasFilter);
   const data = [1, 2, 3, 4, 5];
   const [ratingItem, setRatingItem] = useState({
-    name: "",
+    name: '',
     isActive: false,
   });
 
@@ -23,7 +22,7 @@ function RatingProduct(props) {
   };
 
   useEffect(() => {
-    hasFilter && setRatingItem({ name: "", isActive: false });
+    hasFilter && setRatingItem({ name: '', isActive: false });
   }, [hasFilter]);
 
   const showRating = (data = []) => {
@@ -34,15 +33,15 @@ function RatingProduct(props) {
           onClick={() => handleCheckRating(item)}
           className={
             ratingItem.isActive && ratingItem.name === item
-              ? "active-star products-page__rating__item"
-              : "products-page__rating__item"
+              ? 'active-star products-page__rating__item'
+              : 'products-page__rating__item'
           }
         >
           <ShowStar stars={item} />
         </li>
-      )
-    })
-  }
+      );
+    });
+  };
 
   return <ul className="products-page__rating">{showRating(data)}</ul>;
 }

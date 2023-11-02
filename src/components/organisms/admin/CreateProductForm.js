@@ -1,31 +1,32 @@
-import React, { useEffect, useState } from "react";
-import { useForm, Controller } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
-import { Button, Select, Form, Input, Upload, message } from "antd";
+/* eslint-disable react/prop-types */
+import React, { useEffect, useState } from 'react';
+import { useForm, Controller } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
+import { Button, Select, Form, Input, Upload, message } from 'antd';
 
-import { getSupplier, fetchCategory } from "src/services";
-import { parseBase64 } from "src/common/utils/parseBase64";
+import { getSupplier, fetchCategory } from 'src/services';
+import { parseBase64 } from 'src/common/utils/parseBase64';
 
 const createProductSchema = yup
   .object({
-    name: yup.string().required("Vui lòng nhập tên sản phẩm"),
+    name: yup.string().required('Vui lòng nhập tên sản phẩm'),
     description: yup.string(),
     price: yup
       .number()
-      .required("Vui lòng nhập số tiền")
-      .min(0, "Số tiền tối thiểu là 0"),
-    unit: yup.string().required("Vui lòng nhập đơn vị"),
-    categoryId: yup.string().required("Vui lòng chọn danh mục"),
-    supplierId: yup.string().required("Vui lòng chọn nhà cung cấp"),
-    image: yup.mixed().required("Vui lòng chọn ảnh"),
+      .required('Vui lòng nhập số tiền')
+      .min(0, 'Số tiền tối thiểu là 0'),
+    unit: yup.string().required('Vui lòng nhập đơn vị'),
+    categoryId: yup.string().required('Vui lòng chọn danh mục'),
+    supplierId: yup.string().required('Vui lòng chọn nhà cung cấp'),
+    image: yup.mixed().required('Vui lòng chọn ảnh'),
   })
   .required();
 
 const CreateProductForm = ({ onSubmit }) => {
   const [suppliers, serSuppliers] = useState([]);
   const [categories, setCategories] = useState([]);
-  const [imageUrl, setImageUrl] = useState("");
+  const [imageUrl, setImageUrl] = useState('');
 
   const {
     control,
@@ -34,12 +35,12 @@ const CreateProductForm = ({ onSubmit }) => {
     setValue,
   } = useForm({
     defaultValues: {
-      name: "",
-      description: "",
+      name: '',
+      description: '',
       price: 0,
-      unit: "",
-      categoryId: "",
-      supplierId: "",
+      unit: '',
+      categoryId: '',
+      supplierId: '',
       image: null,
     },
     resolver: yupResolver(createProductSchema),
@@ -55,17 +56,17 @@ const CreateProductForm = ({ onSubmit }) => {
   }, []);
 
   const handleSupplyChange = (value) => {
-    setValue("supplierId", value); // Update the value of the 'category' field
+    setValue('supplierId', value); // Update the value of the 'category' field
   };
 
   const handleCategoryChange = (value) => {
-    setValue("categoryId", value); // Update the value of the 'category' field
+    setValue('categoryId', value); // Update the value of the 'category' field
   };
 
   const handleChangeImage = async (file) => {
     const fsize = file?.size;
     if (fsize && fsize / 1024 >= 4096) {
-      message.error("Fize size too big");
+      message.error('Fize size too big');
       return true;
     }
     const url = await parseBase64(file);
@@ -74,7 +75,7 @@ const CreateProductForm = ({ onSubmit }) => {
   };
   const handleSubmitForm = (formValues) => {
     const { image, ...data } = formValues;
-    console.log("formValues", formValues);
+    console.log('image', image);
     onSubmit({ ...data, imageUrl });
   };
 
@@ -101,7 +102,7 @@ const CreateProductForm = ({ onSubmit }) => {
           rules={[
             {
               required: true,
-              message: "Vui lòng nhập tên sản phẩm",
+              message: 'Vui lòng nhập tên sản phẩm',
             },
           ]}
           required
@@ -112,8 +113,8 @@ const CreateProductForm = ({ onSubmit }) => {
             render={({ field }) => <Input {...field} />}
           />
           {errors.name && (
-            <span style={{ color: "red" }}>
-              {errors?.name?.message ?? "Vui lòng nhập tên sản phẩm"}
+            <span style={{ color: 'red' }}>
+              {errors?.name?.message ?? 'Vui lòng nhập tên sản phẩm'}
             </span>
           )}
         </Form.Item>
@@ -126,13 +127,13 @@ const CreateProductForm = ({ onSubmit }) => {
               <Input.TextArea
                 {...field}
                 maxLength={500}
-                style={{ height: 120, resize: "none" }}
+                style={{ height: 120, resize: 'none' }}
               />
             )}
           />
           {errors.description && (
-            <span style={{ color: "red" }}>
-              {errors?.description?.message ?? "Vui lòng nhập mô tả"}
+            <span style={{ color: 'red' }}>
+              {errors?.description?.message ?? 'Vui lòng nhập mô tả'}
             </span>
           )}
         </Form.Item>
@@ -144,8 +145,8 @@ const CreateProductForm = ({ onSubmit }) => {
             render={({ field }) => <Input type="number" min={0} {...field} />}
           />
           {errors.name && (
-            <span style={{ color: "red" }}>
-              {errors?.price?.message ?? "Vui lòng nhập giá"}
+            <span style={{ color: 'red' }}>
+              {errors?.price?.message ?? 'Vui lòng nhập giá'}
             </span>
           )}
         </Form.Item>
@@ -155,7 +156,7 @@ const CreateProductForm = ({ onSubmit }) => {
           rules={[
             {
               required: true,
-              message: "Vui lòng nhập Đơn vị sản phẩm",
+              message: 'Vui lòng nhập Đơn vị sản phẩm',
             },
           ]}
           required
@@ -166,8 +167,8 @@ const CreateProductForm = ({ onSubmit }) => {
             render={({ field }) => <Input {...field} />}
           />
           {errors.name && (
-            <span style={{ color: "red" }}>
-              {errors?.unit?.message ?? "Vui lòng nhập đơn vị"}
+            <span style={{ color: 'red' }}>
+              {errors?.unit?.message ?? 'Vui lòng nhập đơn vị'}
             </span>
           )}
         </Form.Item>
@@ -178,7 +179,7 @@ const CreateProductForm = ({ onSubmit }) => {
           rules={[
             {
               required: true,
-              message: "Vui lòng chọn Danh mục",
+              message: 'Vui lòng chọn Danh mục',
             },
           ]}
           required
@@ -197,8 +198,8 @@ const CreateProductForm = ({ onSubmit }) => {
             )}
           />
           {errors.categoryId && (
-            <span style={{ color: "red" }}>
-              {errors?.categoryId?.message ?? "Vui lòng chọn Danh mục"}
+            <span style={{ color: 'red' }}>
+              {errors?.categoryId?.message ?? 'Vui lòng chọn Danh mục'}
             </span>
           )}
         </Form.Item>
@@ -210,7 +211,7 @@ const CreateProductForm = ({ onSubmit }) => {
           rules={[
             {
               required: true,
-              message: "Vui lòng chọn Nhà sản xuất",
+              message: 'Vui lòng chọn Nhà sản xuất',
             },
           ]}
         >
@@ -228,8 +229,8 @@ const CreateProductForm = ({ onSubmit }) => {
             )}
           />
           {errors.supplierId && (
-            <span style={{ color: "red" }}>
-              {errors?.supplierId?.message ?? "Vui lòng chọn Nhà sản xuất"}
+            <span style={{ color: 'red' }}>
+              {errors?.supplierId?.message ?? 'Vui lòng chọn Nhà sản xuất'}
             </span>
           )}
         </Form.Item>
@@ -250,8 +251,8 @@ const CreateProductForm = ({ onSubmit }) => {
             )}
           />
           {errors.image && (
-            <span style={{ color: "red" }}>
-              {errors?.image?.message ?? "Vui lòng nhập ảnh sản phẩm"}
+            <span style={{ color: 'red' }}>
+              {errors?.image?.message ?? 'Vui lòng nhập ảnh sản phẩm'}
             </span>
           )}
         </Form.Item>

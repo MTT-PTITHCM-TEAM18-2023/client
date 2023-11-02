@@ -1,5 +1,5 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { fetchProducts } from "../services";
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { fetchProducts } from '../services';
 
 const initialState = {
   list: [],
@@ -15,23 +15,23 @@ const initialState = {
 };
 
 export const getProducts = createAsyncThunk(
-  "products/getProducts",
+  'products/getProducts',
   async ({ page, category }) => {
     const resProduct = await fetchProducts({
       page: page ?? 1,
       limit: 10,
-      cat: category ?? "",
+      cat: category ?? '',
     });
     return resProduct?.data?.data ?? { item: [], data: initialState.data };
   }
 );
 
 export const productSlice = createSlice({
-  name: "products",
+  name: 'products',
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(getProducts.pending, (state, action) => {
+    builder.addCase(getProducts.pending, (state) => {
       state.loading = true;
     });
     builder.addCase(getProducts.fulfilled, (state, action) => {
@@ -40,7 +40,7 @@ export const productSlice = createSlice({
       state.meta = action.payload.meta;
       state.error = false;
     });
-    builder.addCase(getProducts.rejected, (state, action) => {
+    builder.addCase(getProducts.rejected, (state) => {
       state.loading = false;
       state.error = true;
     });

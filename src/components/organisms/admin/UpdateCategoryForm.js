@@ -8,20 +8,16 @@ import { Button, Form, Input } from 'antd';
 const createCategorySchema = yup
   .object({
     name: yup.string().required('Vui lòng nhập tên danh mục'),
-    description: yup.string().required('Vui lòng nhập mô tả'),
   })
   .required();
 
-const CreateCategoryForm = ({ obSubmit }) => {
+const UpdateCategoryForm = ({ obSubmit, defaultValues }) => {
   const {
     control,
     handleSubmit,
     formState: { errors, isSubmitting },
   } = useForm({
-    defaultValues: {
-      name: '',
-      description: '',
-    },
+    defaultValues: defaultValues,
     resolver: yupResolver(createCategorySchema),
   });
 
@@ -68,25 +64,6 @@ const CreateCategoryForm = ({ obSubmit }) => {
           )}
         </Form.Item>
 
-        <Form.Item label="Mô tả sản phẩm">
-          <Controller
-            control={control}
-            name="description"
-            render={({ field }) => (
-              <Input.TextArea
-                {...field}
-                maxLength={500}
-                style={{ height: 120, resize: 'none' }}
-              />
-            )}
-          />
-          {errors.description && (
-            <span style={{ color: 'red' }}>
-              {errors?.description?.message ?? 'Vui lòng nhập mô tả danh mục'}
-            </span>
-          )}
-        </Form.Item>
-
         <Form.Item
           wrapperCol={{
             offset: 8,
@@ -94,7 +71,7 @@ const CreateCategoryForm = ({ obSubmit }) => {
           }}
         >
           <Button loading={isSubmitting} htmlType="submit">
-            Tạo danh mục
+            Lưu
           </Button>
         </Form.Item>
       </Form>
@@ -102,4 +79,4 @@ const CreateCategoryForm = ({ obSubmit }) => {
   );
 };
 
-export default CreateCategoryForm;
+export default UpdateCategoryForm;

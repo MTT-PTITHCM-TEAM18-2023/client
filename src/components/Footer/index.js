@@ -1,19 +1,20 @@
-import React from "react";
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import "./style.scss";
+/* eslint-disable react/jsx-key */
+import React from 'react';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import './style.scss';
 
-function Footer(props) {
+function Footer() {
   let listImgFoolter = [
-    "../assets/images/img-footer/img-1.webp",
-    "../assets/images/img-footer/img-2.webp",
-    "../assets/images/img-footer/img-3.webp",
-    "../assets/images/img-footer/img-4.webp",
-    "../assets/images/img-footer/img-5.webp",
-    "../assets/images/img-footer/img-6.webp",
-    "../assets/images/img-footer/img-7.webp",
-    "../assets/images/img-footer/img-8.webp",
+    '../assets/images/img-footer/img-1.webp',
+    '../assets/images/img-footer/img-2.webp',
+    '../assets/images/img-footer/img-3.webp',
+    '../assets/images/img-footer/img-4.webp',
+    '../assets/images/img-footer/img-5.webp',
+    '../assets/images/img-footer/img-6.webp',
+    '../assets/images/img-footer/img-7.webp',
+    '../assets/images/img-footer/img-8.webp',
   ];
 
   let socialIcon = [
@@ -90,7 +91,7 @@ function Footer(props) {
         </Row>
         <div className="footer__copyright ">
           <p className="text-center">
-            Copyright ©2021 All rights reserved | This template is made with{" "}
+            Copyright ©2021 All rights reserved | This template is made with{' '}
             <i className="far fa-heart"></i>by <a href="#1">Colorlib</a>
           </p>
         </div>

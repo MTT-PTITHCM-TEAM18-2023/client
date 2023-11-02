@@ -1,6 +1,7 @@
+/* eslint-disable react/prop-types */
 import React, { useEffect, useState } from 'react';
 import { fetchOrderStatus } from 'src/services';
-import { Typography, List, Form, Select, Space, Button } from 'antd';
+import { Typography, List, Form, Select, Button } from 'antd';
 
 const UpdateOrderStatusForm = ({ data, onSubmit }) => {
   const [orderStatus, setOrderStatus] = useState([]);

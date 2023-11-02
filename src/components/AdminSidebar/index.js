@@ -1,19 +1,20 @@
-import React from "react";
-import { useLocation, NavLink } from "react-router-dom";
-import { Link } from "react-router-dom";
-import { Nav } from "react-bootstrap";
+/* eslint-disable react/prop-types */
+import React from 'react';
+import { useLocation, NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { Nav } from 'react-bootstrap';
 
 function AdminSidebar({ color, image, routes }) {
   const location = useLocation();
   const activeRoute = (routeName) => {
-    return location.pathname.indexOf(routeName) > -1 ? "active" : "";
+    return location.pathname.indexOf(routeName) > -1 ? 'active' : '';
   };
   return (
     <div className="sidebar" data-image={image} data-color={color}>
       <div
         className="sidebar-background"
         style={{
-          backgroundImage: "url(" + image + ")",
+          backgroundImage: 'url(' + image + ')',
         }}
       />
       <div className="sidebar-wrapper">
@@ -29,7 +30,7 @@ function AdminSidebar({ color, image, routes }) {
                 <li
                   className={
                     prop.upgrade
-                      ? "active active-pro"
+                      ? 'active active-pro'
                       : activeRoute(prop.layout + prop.path)
                   }
                   key={key}

@@ -1,5 +1,5 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { fetchOrders } from "src/services";
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { fetchOrders } from 'src/services';
 
 const initialState = {
   list: [],
@@ -15,7 +15,7 @@ const initialState = {
 };
 
 export const getOrders = createAsyncThunk(
-  "orders/getOrders",
+  'orders/getOrders',
   async ({ page, limit }) => {
     const resOrders = await fetchOrders({
       page: page ?? 1,
@@ -26,11 +26,11 @@ export const getOrders = createAsyncThunk(
 );
 
 export const ordersSlice = createSlice({
-  name: "orders",
+  name: 'orders',
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(getOrders.pending, (state, action) => {
+    builder.addCase(getOrders.pending, (state) => {
       state.loading = true;
     });
     builder.addCase(getOrders.fulfilled, (state, action) => {
@@ -39,7 +39,7 @@ export const ordersSlice = createSlice({
       state.meta = action.payload.meta;
       state.error = false;
     });
-    builder.addCase(getOrders.rejected, (state, action) => {
+    builder.addCase(getOrders.rejected, (state) => {
       state.loading = false;
       state.error = true;
     });

@@ -1,13 +1,14 @@
-import React, { useEffect, useState } from "react";
-import { Container } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
+/* eslint-disable react/prop-types */
+import React, { useEffect, useState } from 'react';
+import { Container } from 'react-bootstrap';
+import { useSelector } from 'react-redux';
 // import { getIdProduct } from "../../actions/product";
-import history from "../../common/utils/history";
-import "./style.scss";
+import history from '../../common/utils/history';
+import './style.scss';
 
 function BoxSearch(props) {
   const { keySearch, inputSearch } = props;
-  const [searchWord, setSearchWord] = useState("");
+  const [searchWord, setSearchWord] = useState('');
   const listProduct = useSelector(
     (state) => state.products?.listProductBySearch
   );
@@ -17,10 +18,10 @@ function BoxSearch(props) {
   }, [keySearch]);
 
   const goToPageDetail = (id) => {
-    history.push("/products/" + id);
-    if (history.location.pathname.indexOf("/products/") !== -1) {
-      setSearchWord("");
-      inputSearch.classList.remove("show");
+    history.push('/products/' + id);
+    if (history.location.pathname.indexOf('/products/') !== -1) {
+      setSearchWord('');
+      inputSearch.classList.remove('show');
     }
   };
 
@@ -40,11 +41,11 @@ function BoxSearch(props) {
                     <span>{item.name}</span>
                   </div>
                 ))
-              : "No have product suitable!"}
+              : 'No have product suitable!'}
           </div>
         </Container>
       ) : (
-        ""
+        ''
       )}
     </>
   );

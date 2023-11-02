@@ -1,27 +1,24 @@
-import React from "react";
-import { Pagination } from "antd";
-import "./style.scss";
-import { useDispatch, useSelector } from "react-redux";
-// import {
-//   getPageLimitNumber,
-//   getPageNumber,
-// } from "../../actions/control-action";
+import React from 'react';
+import { Pagination } from 'antd';
+import './style.scss';
+import { useSelector } from 'react-redux';
 
-function PaginationContainer(props) {
+function PaginationContainer() {
   const filters = useSelector((state) => state.filters);
   const pagination = useSelector((state) => state.pagination);
-  const dispatch = useDispatch();
 
   function onShowSizeChange(current, pageSize) {
+    console.log(current, pageSize);
     // dispatch(getPageLimitNumber({ page: current, limit: pageSize }));
   }
 
   function onChange(pageNumber) {
+    console.log(pageNumber);
     // dispatch(getPageNumber(pageNumber));
     window.scrollTo({
       top: 100,
       left: 100,
-      behavior: "smooth",
+      behavior: 'smooth',
     });
   }
 
@@ -32,7 +29,7 @@ function PaginationContainer(props) {
         onShowSizeChange={onShowSizeChange}
         current={filters._page}
         total={pagination.totalPages}
-        pageSizeOptions={["6", "9", "12"]}
+        pageSizeOptions={['6', '9', '12']}
         pageSize={filters._limit}
         onChange={onChange}
       />

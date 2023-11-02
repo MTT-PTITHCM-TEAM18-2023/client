@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
-import "./style.scss";
+import React, { useEffect, useState } from 'react';
+import './style.scss';
 
-function ButtonToTop(props) {
+function ButtonToTop() {
   const [height, setHeight] = useState(0);
   const handleToTop = () => {
-    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
   };
 
   useEffect(() => {
@@ -22,7 +22,7 @@ function ButtonToTop(props) {
           </button>
         </div>
       ) : (
-        ""
+        ''
       )}
     </>
   );

@@ -1,19 +1,19 @@
-import React from "react";
-import { useLocation } from "react-router-dom";
-import { Navbar, Container, Nav, Dropdown, Button } from "react-bootstrap";
+import React from 'react';
+import { useLocation } from 'react-router-dom';
+import { Navbar, Container, Nav, Button } from 'react-bootstrap';
 
-import routes from "../../routers/adminRouter";
+import routes from '../../routers/adminRouter';
 
 function AdminNavbar() {
   const location = useLocation();
   const mobileSidebarToggle = (e) => {
     e.preventDefault();
-    document.documentElement.classList.toggle("nav-open");
-    const node = document.createElement("div");
-    node.id = "bodyClick";
+    document.documentElement.classList.toggle('nav-open');
+    const node = document.createElement('div');
+    node.id = 'bodyClick';
     node.onclick = function () {
       this.parentElement.removeChild(this);
-      document.documentElement.classList.toggle("nav-open");
+      document.documentElement.classList.toggle('nav-open');
     };
     document.body.appendChild(node);
   };
@@ -24,7 +24,7 @@ function AdminNavbar() {
         return element.name;
       }
     }
-    return "Brand";
+    return 'Brand';
   };
   return (
     <Navbar bg="light" expand="lg">

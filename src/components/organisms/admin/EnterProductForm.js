@@ -1,19 +1,20 @@
-import React from "react";
-import { useForm, Controller } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
-import { Button, Form, Input } from "antd";
+/* eslint-disable react/prop-types */
+import React from 'react';
+import { useForm, Controller } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
+import { Button, Form, Input } from 'antd';
 
 const enterProductSchema = yup
   .object({
     qty: yup
       .number()
-      .required("Vui lòng nhập số lượng")
-      .min(0, "Số tiền tối thiểu là 0"),
+      .required('Vui lòng nhập số lượng')
+      .min(0, 'Số tiền tối thiểu là 0'),
     price: yup
       .number()
-      .required("Vui lòng nhập số tiền")
-      .min(0, "Số tiền tối thiểu là 0"),
+      .required('Vui lòng nhập số tiền')
+      .min(0, 'Số tiền tối thiểu là 0'),
   })
   .required();
 
@@ -60,7 +61,7 @@ const EnterProductForm = ({ onSubmit }) => {
             render={({ field }) => <Input type="number" min={0} {...field} />}
           />
           {errors.qty && (
-            <span style={{ color: "red" }}>{errors.qty.message}</span>
+            <span style={{ color: 'red' }}>{errors.qty.message}</span>
           )}
         </Form.Item>
 
@@ -71,7 +72,7 @@ const EnterProductForm = ({ onSubmit }) => {
             render={({ field }) => <Input type="number" min={0} {...field} />}
           />
           {errors.name && (
-            <span style={{ color: "red" }}>{errors.price.message}</span>
+            <span style={{ color: 'red' }}>{errors.price.message}</span>
           )}
         </Form.Item>
 

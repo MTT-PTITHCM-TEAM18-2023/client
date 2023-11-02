@@ -1,11 +1,12 @@
-import React from "react";
-import ProductItem from "../ProductItem";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import Loading from "./../Loading";
+/* eslint-disable react/prop-types */
+import React from 'react';
+import ProductItem from '../ProductItem';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Loading from './../Loading';
 
-import "./style.scss";
-import { useSelector } from "react-redux";
+import './style.scss';
+import { useSelector } from 'react-redux';
 
 const showProduct = (data = [], xl) => {
   return data.map((item) => {

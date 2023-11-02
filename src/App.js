@@ -3,9 +3,9 @@ import ButtonToTop from './components/ButtonToTop';
 import ScrollToTop from './components/ScrollToTop';
 import UserLayout from './layouts/User/UserLayout';
 import AdminLayout from './layouts/Admin/AdminLayout';
-import routersUser from './routers/userRouter';
+import React from 'react';
 import './style/styles.scss';
-
+import routersUser from 'src/routers/userRouter';
 import history from './common/utils/history';
 
 function App() {

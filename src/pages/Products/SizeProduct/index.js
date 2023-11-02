@@ -1,15 +1,14 @@
-import React, { useState } from "react";
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useState } from 'react';
+import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 // import { getSizeProduct } from "../../../actions/control-action";
-import "./style.scss";
+import './style.scss';
 
-function SizeProduct(props) {
+function SizeProduct() {
   const data = [38, 39, 40, 41, 42];
-  const dispatch = useDispatch();
   const hasFilter = useSelector((state) => state.filters.hasFilter);
   const [sizeItem, setSizeItem] = useState({
-    name: "",
+    name: '',
     isActive: false,
   });
   const handleCheckSize = (value) => {
@@ -21,7 +20,7 @@ function SizeProduct(props) {
   };
 
   useEffect(() => {
-    hasFilter && setSizeItem({ name: "", isActive: false });
+    hasFilter && setSizeItem({ name: '', isActive: false });
   }, [hasFilter]);
 
   const showSize = (data = []) => {
@@ -32,15 +31,15 @@ function SizeProduct(props) {
           onClick={() => handleCheckSize(item)}
           className={
             sizeItem.isActive && sizeItem.name === item
-              ? "active-size products-page__size__item"
-              : "products-page__size__item"
+              ? 'active-size products-page__size__item'
+              : 'products-page__size__item'
           }
         >
           {item}
         </li>
-      )
-    })
-  }
+      );
+    });
+  };
 
   return <ul className="products-page__size">{showSize(data)}</ul>;
 }

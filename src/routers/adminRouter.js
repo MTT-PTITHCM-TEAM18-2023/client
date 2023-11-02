@@ -1,25 +1,25 @@
-// import Dashboard from "../pages/Admin/Dashboard";
+import Dashboard from '../pages/Admin/Dashboard';
 // import UserProfile from "../pages/Admin/UserProfile";
 import OrderList from '../pages/Admin/OrderList';
 import Products from '../pages/Admin/Products';
-import Category from '../pages/Admin/Category';
+import Category from 'src/pages/Admin/Category';
 
 const adminRoutes = [
   {
     path: '/dashboard',
     absolute: true,
-    name: 'OrderList',
+    name: 'Home',
     icon: 'nc-icon nc-chart-pie-35',
+    component: Dashboard,
+    layout: '/admin',
+  },
+  {
+    path: '/order',
+    name: 'Orders',
+    icon: 'nc-icon nc-circle-09',
     component: OrderList,
     layout: '/admin',
   },
-  // {
-  //   path: "/user",
-  //   name: "User Profile",
-  //   icon: "nc-icon nc-circle-09",
-  //   component: UserProfile,
-  //   layout: "/admin",
-  // },
   {
     path: '/products',
     name: 'Product List',

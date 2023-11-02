@@ -1,15 +1,14 @@
-import React, { useState } from "react";
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useState } from 'react';
+import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 // import { getColorProduct } from "../../../actions/control-action";
-import "./style.scss";
+import './style.scss';
 
-function ColorProduct(props) {
-  const data = ["red", "black", "white", "gray"];
+function ColorProduct() {
+  const data = ['red', 'black', 'white', 'gray'];
   const hasFilter = useSelector((state) => state.filters.hasFilter);
-  const dispatch = useDispatch();
   const [colorItem, setColorItem] = useState({
-    name: "",
+    name: '',
     isActive: false,
   });
   const handleCheckColor = (value) => {
@@ -21,7 +20,7 @@ function ColorProduct(props) {
   };
 
   useEffect(() => {
-    hasFilter && setColorItem({ name: "", isActive: false });
+    hasFilter && setColorItem({ name: '', isActive: false });
   }, [hasFilter]);
 
   const showColor = (data = []) => {
@@ -36,9 +35,9 @@ function ColorProduct(props) {
               : `products-page__color__item products-page__color__item--${item}`
           }
         ></li>
-      )
-    })
-  }
+      );
+    });
+  };
 
   return <ul className="products-page__color">{showColor(data)}</ul>;
 }

@@ -1,7 +1,9 @@
-import { useEffect, useState } from "react";
-import { Button, Modal, Space, Table } from "antd";
-import { fetchCategory, createCategory } from "src/services";
-import CreateCategoryForm from "src/components/organisms/admin/CreateCategoryForm";
+import React, { useEffect, useState } from 'react';
+import { Button, Modal, Space, Table, message } from 'antd';
+import { fetchCategory, createCategory, updateCategory } from 'src/services';
+import CreateCategoryForm from 'src/components/organisms/admin/CreateCategoryForm';
+import { MSG } from 'src/constants/messageCode';
+import UpdateCategoryForm from 'src/components/organisms/admin/UpdateCategoryForm';
 
 const Category = () => {
   const [page, setPage] = useState(1);
@@ -13,21 +15,21 @@ const Category = () => {
 
   const columns = [
     {
-      title: "Id",
-      dataIndex: "id",
-      key: "id",
+      title: 'Id',
+      dataIndex: 'id',
+      key: 'id',
     },
     {
-      title: "Category",
-      dataIndex: "name",
-      key: "name",
+      title: 'Category',
+      dataIndex: 'name',
+      key: 'name',
     },
     {
-      title: "Hành động",
-      key: "action",
-      render: (_, record) => (
+      title: 'Hành động',
+      key: 'action',
+      render: (_, cat) => (
         <Space size="middle">
-          <Button>Chỉnh sửa</Button>
+          <Button onClick={() => handleEditCategory(cat)}>Chỉnh sửa</Button>
         </Space>
       ),
     },
@@ -47,7 +49,7 @@ const Category = () => {
 
   const handleCreateCategory = async (formValues) => {
     const res = await createCategory(formValues);
-    console.log("res", res);
+    console.log('res', res);
     handleCloseCreateModal();
   };
 
@@ -59,9 +61,28 @@ const Category = () => {
     setIsCreateModalOpen(false);
   };
 
-  const handleEditCategory = async ({ id, name }) => {
-    setCategory({ id, name });
+  const handleEditCategory = async (data) => {
+    setCategory(data);
     setOpenEditCategory(true);
+  };
+
+  const handleCloseEditModal = () => {
+    setOpenEditCategory(false);
+  };
+
+  const handleSubmitUpdateCategory = async (formValues) => {
+    try {
+      const res = await updateCategory({ id: category.id, ...formValues });
+      console.log('res', res);
+      message.success(MSG?.[res.data.message] ?? '');
+
+      const newdata = await fetchCategory({ limit: 10, page: page });
+      setCategories(newdata.data.data.items);
+      setTotal(newdata.data.data.meta.totalItems);
+      handleCloseEditModal();
+    } catch {
+      message.error(MSG.UPDATE_CAT_FAILED);
+    }
   };
 
   return (
@@ -77,6 +98,22 @@ const Category = () => {
           <CreateCategoryForm obSubmit={handleCreateCategory} />
         )}
       </Modal>
+
+      {openEditCategory && (
+        <Modal
+          title="Cập nhật danh mục"
+          open={openEditCategory}
+          footer={null}
+          onCancel={handleCloseEditModal}
+        >
+          <UpdateCategoryForm
+            obSubmit={handleSubmitUpdateCategory}
+            defaultValues={{
+              name: category.name,
+            }}
+          />
+        </Modal>
+      )}
 
       <Table
         dataSource={categories}

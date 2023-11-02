@@ -1,5 +1,6 @@
-import React from "react";
-import "./style.scss";
+/* eslint-disable react/prop-types */
+import React from 'react';
+import './style.scss';
 
 function ShowStar(props) {
   const { stars } = props;
