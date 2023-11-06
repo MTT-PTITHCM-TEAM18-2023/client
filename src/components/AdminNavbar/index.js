@@ -1,11 +1,12 @@
 import React from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useHistory } from 'react-router-dom';
 import { Navbar, Container, Nav, Button } from 'react-bootstrap';
 
 import routes from '../../routers/adminRouter';
 
 function AdminNavbar() {
   const location = useLocation();
+  const history = useHistory();
   const mobileSidebarToggle = (e) => {
     e.preventDefault();
     document.documentElement.classList.toggle('nav-open');
@@ -26,6 +27,10 @@ function AdminNavbar() {
     }
     return 'Brand';
   };
+  const handleLogout = () => {
+    localStorage.removeItem('authentication_token');
+    history.push('/login');
+  };
   return (
     <Navbar bg="light" expand="lg">
       <Container fluid>
@@ -38,7 +43,7 @@ function AdminNavbar() {
             <i className="fas fa-ellipsis-v"></i>
           </Button>
           <Navbar.Brand
-            href="#home"
+            href="/admin"
             onClick={(e) => e.preventDefault()}
             className="mr-2"
           >
@@ -54,13 +59,9 @@ function AdminNavbar() {
           <Nav className="nav mr-auto" navbar></Nav>
           <Nav className="ml-auto" navbar>
             <Nav.Item>
-              <Nav.Link
-                className="m-0"
-                href="#pablo"
-                onClick={(e) => e.preventDefault()}
-              >
-                <span className="no-icon">Log out</span>
-              </Nav.Link>
+              <Button className="no-icon" onClick={handleLogout}>
+                Đăng xuất
+              </Button>
             </Nav.Item>
           </Nav>
         </Navbar.Collapse>

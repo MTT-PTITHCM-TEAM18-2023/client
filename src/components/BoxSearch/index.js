@@ -1,21 +1,29 @@
 /* eslint-disable react/prop-types */
 import React, { useEffect, useState } from 'react';
 import { Container } from 'react-bootstrap';
-import { useSelector } from 'react-redux';
-// import { getIdProduct } from "../../actions/product";
-import history from '../../common/utils/history';
+import { fetchProducts } from 'src/services/product';
+import history from 'src/common/utils/history';
 import './style.scss';
 
 function BoxSearch(props) {
   const { keySearch, inputSearch } = props;
   const [searchWord, setSearchWord] = useState('');
-  const listProduct = useSelector(
-    (state) => state.products?.listProductBySearch
-  );
+  const [listProduct, setListProduct] = useState([]);
 
   useEffect(() => {
     setSearchWord(keySearch);
   }, [keySearch]);
+
+  useEffect(() => {
+    (async () => {
+      const resProduct = await fetchProducts({
+        page: 1,
+        limit: 10,
+        text: searchWord,
+      });
+      setListProduct(resProduct?.data?.data?.items);
+    })();
+  }, [searchWord]);
 
   const goToPageDetail = (id) => {
     history.push('/products/' + id);
@@ -37,7 +45,7 @@ function BoxSearch(props) {
                     onClick={() => goToPageDetail(item.id)}
                     className="box-search__link"
                   >
-                    <img src={item.link_img[0]} alt={item.name} />
+                    <img src={item.imageUrl} alt={item.name} />
                     <span>{item.name}</span>
                   </div>
                 ))

@@ -1,10 +1,10 @@
-import React, { useEffect, useRef, useState } from "react";
-import Container from "react-bootstrap/Container";
-import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
-import { getCart } from "../../store/cart";
-import BoxSearch from "../BoxSearch";
-import "./style.scss";
+import React, { useEffect, useRef, useState } from 'react';
+import Container from 'react-bootstrap/Container';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { getCart } from '../../store/cart';
+import BoxSearch from '../BoxSearch';
+import './style.scss';
 
 function Header() {
   const dispatch = useDispatch();
@@ -27,8 +27,8 @@ function Header() {
   };
 
   const handleClearSearch = () => {
-    inputSearch.current = "";
-    setKeySearch("");
+    inputSearch.current = '';
+    setKeySearch('');
   };
 
   return (

@@ -11,6 +11,7 @@ import { useHistory } from 'react-router-dom';
 import './style.scss';
 import { setUserMeta } from 'src/store';
 import { loginService } from 'src/services';
+import { MSG } from 'src/constants/messageCode';
 
 const loginSchema = yup
   .object({
@@ -38,10 +39,10 @@ function Login() {
 
   useEffect(() => {
     if (!user.isLogin && user.errorLoginMessage) {
-      message.warning(user.errorLoginMessage);
+      message.warning(MSG.LOG_IN_FAILED);
     }
     if (user.isLogin && user.succesLoginMessage) {
-      message.success('Login success');
+      message.success(MSG.LOG_IN_SUCCESS);
     }
   }, [user]);
 

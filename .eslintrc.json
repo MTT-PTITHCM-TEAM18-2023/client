@@ -11,8 +11,8 @@
       "jsx": true
     }
   },
-  "plugins": ["react", "react-hooks"],
+  "plugins": ["react", "react-hooks", "prettier"],
   "rules": {
-    //add customize rules here as per your project's needs
+    "no-undef": "error"
   }
 }  

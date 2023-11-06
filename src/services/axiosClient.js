@@ -19,7 +19,7 @@ axiosClient.interceptors.response.use(
     }
     if (error.response) {
       if (error.response.status === 401 || error.response.status === 403) {
-        window.location.href = '/login';
+        window.location.href = '/';
       }
     }
     return Promise.reject(error);
@@ -49,7 +49,6 @@ export async function authPatch(url, params = {}) {
 }
 
 export async function authPost(url, params) {
-  console.log('params', params);
   return await axiosClient.post(url, params);
 }
 

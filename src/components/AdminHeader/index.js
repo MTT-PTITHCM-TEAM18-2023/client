@@ -1,19 +1,20 @@
-import React from "react";
-import { useLocation } from "react-router-dom";
-import { Navbar, Container, Nav, Dropdown, Button } from "react-bootstrap";
+import React from 'react';
+import { useLocation, useHistory } from 'react-router-dom';
+import { Navbar, Container, Nav, Dropdown, Button } from 'react-bootstrap';
 
-import routes from "routes.js";
+import routes from 'routes.js';
 
 function AdminHeader() {
   const location = useLocation();
+  const history = useHistory;
   const mobileSidebarToggle = (e) => {
     e.preventDefault();
-    document.documentElement.classList.toggle("nav-open");
-    const node = document.createElement("div");
-    node.id = "bodyClick";
+    document.documentElement.classList.toggle('nav-open');
+    const node = document.createElement('div');
+    node.id = 'bodyClick';
     node.onclick = function () {
       this.parentElement.removeChild(this);
-      document.documentElement.classList.toggle("nav-open");
+      document.documentElement.classList.toggle('nav-open');
     };
     document.body.appendChild(node);
   };
@@ -24,7 +25,12 @@ function AdminHeader() {
         return element.name;
       }
     }
-    return "Brand";
+    return 'Brand';
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem('authentication_token');
+    history.push('/login');
   };
   return (
     <Navbar bg="light" expand="lg">
@@ -176,12 +182,8 @@ function AdminHeader() {
               </Dropdown.Menu>
             </Dropdown>
             <Nav.Item>
-              <Nav.Link
-                className="m-0"
-                href="#pablo"
-                onClick={(e) => e.preventDefault()}
-              >
-                <span className="no-icon">Log out</span>
+              <Nav.Link className="m-0" onClick={handleLogout}>
+                <span className="no-icon">Đăng xuất</span>
               </Nav.Link>
             </Nav.Item>
           </Nav>

@@ -1,21 +1,19 @@
-import React from "react";
+import React from 'react';
 
-import HomePage from "src/pages/Home";
-import ProductsPage from "src/pages/Products";
-import DetailProduct from "src/pages/DetailProduct";
-import Login from "src/pages/Login";
-import Register from "src/pages/Register";
-import Cart from "src/pages/Cart";
-import Profile from "src/pages/Profile";
+import HomePage from 'src/pages/Home';
+import ProductsPage from 'src/pages/Products';
+import DetailProduct from 'src/pages/DetailProduct';
+import Register from 'src/pages/Register';
+import Cart from 'src/pages/Cart';
+import Profile from 'src/pages/Profile';
 import {
   cartURL,
   homeURL,
-  loginURL,
   productDetailURL,
   productsURL,
   profileURL,
   registerURL,
-} from "src/constants/baseURL";
+} from 'src/constants/baseURL';
 
 const routers = [
   {
@@ -32,11 +30,6 @@ const routers = [
     path: productDetailURL,
     exact: true,
     main: <DetailProduct />,
-  },
-  {
-    path: loginURL,
-    exact: true,
-    main: <Login />,
   },
   {
     path: registerURL,

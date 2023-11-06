@@ -7,26 +7,26 @@ import {
   Popconfirm,
   Space,
   Table,
-} from "antd";
-import React, { useEffect, useState } from "react";
-import { Col, Container, Row } from "react-bootstrap";
-import { useTranslation } from "react-i18next";
-import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+} from 'antd';
+import React, { useEffect, useState } from 'react';
+import { Col, Container, Row } from 'react-bootstrap';
+import { useTranslation } from 'react-i18next';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import {
   checkoutSendOTP,
   checkoutVerify,
   placeOrder,
-} from "../../services/user";
-import ProductSeen from "../../components/ProductSeen";
-import { deleteCart, updateCart } from "../../store/cart";
-import history from "../../common/utils/history";
-import ShowBill from "./ShowBill";
-import "./style.scss";
+} from '../../services/user';
+import ProductSeen from '../../components/ProductSeen';
+import { deleteCart, updateCart } from '../../store/cart';
+import history from '../../common/utils/history';
+import ShowBill from './ShowBill';
+import './style.scss';
 
-const formatter = new Intl.NumberFormat("en-US", {
-  style: "currency",
-  currency: "VND",
+const formatter = new Intl.NumberFormat('en-US', {
+  style: 'currency',
+  currency: 'VND',
 });
 function CartPage() {
   const { t } = useTranslation();
@@ -40,19 +40,19 @@ function CartPage() {
   const [listOrder, setListOrder] = useState([]);
   const [totalMoneyListOrder, setTotalMoneyListOrder] = useState(0);
   const [infoUser, setInfoUser] = useState({
-    email: "",
-    code: "",
-    name: "",
-    phone: "",
-    address: "",
+    email: '',
+    code: '',
+    name: '',
+    phone: '',
+    address: '',
     listOrder: [],
   });
   const [loading, setLoading] = useState(false);
 
   const columns = [
     {
-      title: `${t("cartPage.product")}`,
-      dataIndex: "product",
+      title: `${t('cartPage.product')}`,
+      dataIndex: 'product',
       render: ({ id, img, name }) => (
         <div className="product-info-cart">
           <div className="product-info-cart__img mr-10">
@@ -64,7 +64,7 @@ function CartPage() {
           </div>
           <div className="product-info-cart__content">
             <Link
-              to={"products/" + id}
+              to={'products/' + id}
               className="product-info-cart__content__link"
             >
               {name}
@@ -74,13 +74,13 @@ function CartPage() {
       ),
     },
     {
-      title: `${t("cartPage.price")}`,
-      dataIndex: "price",
+      title: `${t('cartPage.price')}`,
+      dataIndex: 'price',
       render: (value) => <p>{formatter.format(value)}</p>,
     },
     {
-      title: `${t("cartPage.quantity")}`,
-      dataIndex: "order",
+      title: `${t('cartPage.quantity')}`,
+      dataIndex: 'order',
       render: ({ index, order, quantity }) => {
         return (
           <InputNumber
@@ -97,18 +97,18 @@ function CartPage() {
       colSpan: 1,
     },
     {
-      title: `${t("cartPage.total")}`,
-      dataIndex: "total",
+      title: `${t('cartPage.total')}`,
+      dataIndex: 'total',
       render: (value) => <p>{formatter.format(value)}</p>,
     },
     {
-      title: `${t("cartPage.action")}`,
-      key: "action",
-      dataIndex: "action",
+      title: `${t('cartPage.action')}`,
+      key: 'action',
+      dataIndex: 'action',
       render: (index) => (
         <Space size="middle">
           <Popconfirm
-            title={t("cartPage.messageDeleteProduct")}
+            title={t('cartPage.messageDeleteProduct')}
             onConfirm={() => {
               handleDeleteCartItem(index);
             }}
@@ -165,7 +165,7 @@ function CartPage() {
 
   function handleDeleteCartItem(index) {
     dispatch(deleteCart([index]));
-    message.success("Xóa sản phẩm thành công");
+    message.success('Xóa sản phẩm thành công');
   }
 
   function handleTableChange(pagination) {
@@ -173,16 +173,16 @@ function CartPage() {
     window.scrollTo({
       top: 100,
       left: 100,
-      behavior: "smooth",
+      behavior: 'smooth',
     });
   }
 
   const handleGetCode = async () => {
     if (infoUser.email) {
       checkoutSendOTP({ email: infoUser.email });
-      message.success("Mã code đã được gửi về mail: " + infoUser.email);
+      message.success('Mã code đã được gửi về mail: ' + infoUser.email);
     } else {
-      message.error("Vui lòng nhập mail và gửi lại");
+      message.error('Vui lòng nhập mail và gửi lại');
     }
   };
 
@@ -190,22 +190,23 @@ function CartPage() {
     try {
       setLoading(true);
       if (!listOrder.length) {
-        message.error("Vui lòng chọn sản phẩm");
+        message.error('Vui lòng chọn sản phẩm');
         return;
       }
       const resCheckoutVerify = await checkoutVerify({
         email: infoUser.email,
         code: infoUser.code,
       });
-      if (resCheckoutVerify?.data?.status === "ERROR") {
+      if (resCheckoutVerify?.data?.status === 'ERROR') {
         message.error(resCheckoutVerify?.data?.message);
         return;
       }
-      if (resCheckoutVerify?.data?.status === "OK") {
+      if (resCheckoutVerify?.data?.status === 'OK') {
         localStorage.setItem(
-          "authentication_token",
+          'authentication_token',
           resCheckoutVerify.data?.data?.jwt
         );
+        console.log('TEST');
         const res = await placeOrder({
           items: infoUser.listOrder,
           customer: {
@@ -214,18 +215,18 @@ function CartPage() {
             address: infoUser.address,
           },
         });
-        if (res.data?.status === "OK") {
-          message.success("Bạn đã đặt hàng thành công");
-          history.push("/");
+        if (res.data?.status === 'OK') {
+          message.success('Bạn đã đặt hàng thành công');
+          history.push('/');
           const indexOrder = listOrder.map((item) => item?.order?.index);
-          console.log("indexOrder:", indexOrder);
+          console.log('indexOrder:', indexOrder);
           dispatch(deleteCart(indexOrder));
         } else {
           res.error(resCheckoutVerify?.data?.message);
         }
       }
     } catch (error) {
-      console.log("error:", error);
+      console.log('error:', error);
     } finally {
       setLoading(false);
     }
@@ -239,7 +240,7 @@ function CartPage() {
             <div className="cart-page__table">
               <Table
                 rowSelection={{
-                  type: "checkbox",
+                  type: 'checkbox',
                   ...rowSelection,
                 }}
                 columns={columns}
@@ -252,7 +253,7 @@ function CartPage() {
           <Col xl={4} sm={12}>
             <div className="cart-page__order">
               <h2 className="cart-page__order__title">
-                {t("cartPage.titleOrder")}
+                {t('cartPage.titleOrder')}
               </h2>
               <ul className="cart-page__order__list">
                 <ShowBill
@@ -267,7 +268,7 @@ function CartPage() {
                   rules={[
                     {
                       required: true,
-                      message: "Vui lòng nhập Email",
+                      message: 'Vui lòng nhập Email',
                     },
                   ]}
                 >
@@ -295,7 +296,7 @@ function CartPage() {
                   rules={[
                     {
                       required: true,
-                      message: "Vui lòng nhập Code",
+                      message: 'Vui lòng nhập Code',
                     },
                   ]}
                 >
@@ -313,7 +314,7 @@ function CartPage() {
                   rules={[
                     {
                       required: true,
-                      message: "Vui lòng nhập tên",
+                      message: 'Vui lòng nhập tên',
                     },
                   ]}
                 >
@@ -331,7 +332,7 @@ function CartPage() {
                   rules={[
                     {
                       required: true,
-                      message: "Vui lòng nhập số điện thoại",
+                      message: 'Vui lòng nhập số điện thoại',
                     },
                   ]}
                 >
@@ -350,7 +351,7 @@ function CartPage() {
                   rules={[
                     {
                       required: true,
-                      message: "Vui lòng nhập địa chỉ",
+                      message: 'Vui lòng nhập địa chỉ',
                     },
                   ]}
                 >
