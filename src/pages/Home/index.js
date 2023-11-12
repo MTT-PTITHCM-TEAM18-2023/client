@@ -56,7 +56,8 @@ function HomePage() {
   }, [page, pageSize, query]);
 
   const onChange = (page) => {
-    history.push(`?page=${page}`);
+    // history.push(`?page=${page}`);
+    setPage(page);
   };
 
   const handleSelectCategory = (id) => {

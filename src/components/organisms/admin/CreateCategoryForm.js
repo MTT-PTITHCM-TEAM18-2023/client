@@ -8,7 +8,7 @@ import { Button, Form, Input } from 'antd';
 const createCategorySchema = yup
   .object({
     name: yup.string().required('Vui lòng nhập tên danh mục'),
-    description: yup.string().required('Vui lòng nhập mô tả'),
+    description: yup.string(),
   })
   .required();
 
@@ -80,11 +80,6 @@ const CreateCategoryForm = ({ obSubmit }) => {
               />
             )}
           />
-          {errors.description && (
-            <span style={{ color: 'red' }}>
-              {errors?.description?.message ?? 'Vui lòng nhập mô tả danh mục'}
-            </span>
-          )}
         </Form.Item>
 
         <Form.Item

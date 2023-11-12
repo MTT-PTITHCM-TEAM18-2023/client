@@ -51,7 +51,7 @@ function Login() {
       const res = await loginService(values);
       localStorage.setItem('authentication_token', res.data.data.jwt);
       dispatch(setUserMeta(res.data));
-      message.success(res.data.message);
+      message.success(MSG?.[res.data.message] ?? MSG.LOG_IN_SUCCESS);
       history.push('/admin/dashboard');
     } catch {
       setError('password', {
