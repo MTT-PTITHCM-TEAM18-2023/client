@@ -95,7 +95,7 @@ const Provider = () => {
     try {
       const res = await updateSupplier({ id: supplier.id, ...formValues });
       message.success(
-        MSG?.[res.data.message] ?? 'Cập nhật nhà cung cấp không thành công'
+        MSG?.[res.data.message] ?? 'Cập nhật nhà cung cấp thành công'
       );
 
       const newdata = await getSupplier({ limit: 10, page: page });

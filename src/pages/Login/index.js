@@ -92,7 +92,7 @@ function Login() {
                   )}
                 </Form.Item>
 
-                <Form.Item label="Password" required>
+                <Form.Item label="Mật khẩu" required>
                   <Controller
                     control={control}
                     name="password"
@@ -110,12 +110,12 @@ function Login() {
                   valuePropName="checked"
                   wrapperCol={{ offset: 8, span: 16 }}
                 >
-                  <Checkbox>Remember me</Checkbox>
+                  <Checkbox>Ghi nhớ đăng nhập</Checkbox>
                 </Form.Item>
 
                 <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
                   <Button loading={isSubmitting} htmlType="submit">
-                    Submit
+                    Đăng nhập
                   </Button>
                 </Form.Item>
               </Form>

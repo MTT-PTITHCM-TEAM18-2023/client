@@ -26,6 +26,8 @@ export const MSG = {
   // common
   NOT_VERIFIED: 'Lỗi xác thực',
   INVALID_EMAIL: 'Email không hợp lệ',
+  PLEASE_ENTER_MAIL: 'Vui lòng nhập mail và gửi lại',
+  CODE_SEND_AREADY: 'Mã code đã được gửi về mail: ',
   INVALID_EMAIL_OR_PASS: 'Email hoặc mật khẩu không hợp lệ',
   SEND_OTP_FAILED: 'Mã OTP đã gửi không thành công',
   SEND_OTP_SUCCESS: 'Mã OTP đã gửi thành công',
@@ -37,8 +39,11 @@ export const MSG = {
   LOG_OUT_SUCCESS: 'Đăng xuất thành công',
   LOG_IN_FAILED: 'Đăng nhập không thành công',
   LOG_IN_SUCCESS: 'Đăng nhập thành công',
+  ADD_PRODUCT_OVER_QTY: 'Số lượng vượt quá tồn kho',
+  ADD_PRODUCT_TO_CART_SUCCESS: 'Thêm vào giỏ hàng thành công',
 
   // customer
+  CART_EMPTY_ERROR: 'Vui lòng chọn sản phẩm',
   CUSTOMER_INFO_INVALID: 'Thông tin khách hàng không hợp lệ',
   UPDATE_CUSTOMER_FAILED: 'Cập nhật thông tin khách hàng không thành công',
   UPDATE_CUSTOMER_SUCCESS: 'Cập nhật thông tin khách hàng thành công',
@@ -59,6 +64,8 @@ export const MSG = {
   DELETE_PRODUCT_FAILED: 'Xóa sản phẩm không thành công',
   FIND_BY_NAME_PRODUCT_SUCCESS: 'Tìm kiếm sản phẩm thành công',
   FIND_BY_NAME_PRODUCT_FAILED: 'Tìm kiếm sản phẩm không thành công',
+  ENTER_PRODUCT_SUCCESS: 'Nhập hàng thành công',
+  ENTER_PRODUCT_FAILED: 'Nhập hàng không thành công',
 
   // user
   GET_PROFILE_SUCCESS: 'Get profile successfully',

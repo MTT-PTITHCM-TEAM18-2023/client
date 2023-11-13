@@ -1,26 +1,28 @@
-import { InputNumber, message } from "antd";
-import React, { useEffect, useState } from "react";
-import Col from "react-bootstrap/Col";
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import { useTranslation } from "react-i18next";
-import { useDispatch } from "react-redux";
-import { fetchProductDetail } from "../../services/product";
-import ProductSeen from "../../components/ProductSeen";
-import history from "../../common/utils/history";
-import "./style.scss";
-import { addCart } from "../../store/cart";
+import { InputNumber } from 'antd';
+import React, { useEffect, useState } from 'react';
+import Col from 'react-bootstrap/Col';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import { useTranslation } from 'react-i18next';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchProductDetail } from '../../services/product';
+import ProductSeen from '../../components/ProductSeen';
+import history from '../../common/utils/history';
+import './style.scss';
+import { addCart } from '../../store/cart';
 
 function DetailProduct() {
-  let formatter = new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency: "VND",
+  let formatter = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'VND',
   });
   const { t } = useTranslation();
   const dispatch = useDispatch();
+  const cartStore = useSelector((state) => state.cart);
   const [quantity, setQuantity] = useState(1);
   const idProduct = history.location.pathname.slice(10);
   const [productDetail, setProductDetail] = useState(null);
+  console.log('cartStore', cartStore);
 
   useEffect(() => {
     (async () => {
@@ -28,21 +30,27 @@ function DetailProduct() {
         const resProductDetail = await fetchProductDetail(idProduct);
         setProductDetail(resProductDetail?.data?.data);
       } catch (error) {
-        console.log("error:", error);
+        console.log('error:', error);
       }
     })();
   }, [dispatch, idProduct]);
 
   const onChangeQuantity = (value) => {
+    console.log(value);
+    console.log('isNaN(value)', isNaN(value));
+    if (!value || isNaN(value)) {
+      setQuantity(1);
+      return;
+    }
     setQuantity(value);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    // const isValidQty = quantity + productDetail?.qty;
     dispatch(addCart({ data: productDetail, order: quantity }));
-    message.success("Đã thêm sản phẩm vào giỏ!");
   };
-
+  console.log('quantity', quantity);
   return (
     <>
       <div className="detail-product mt-50">
@@ -96,7 +104,7 @@ function DetailProduct() {
                       type="submit"
                       className="btn btn--primary btn--detail-product"
                     >
-                      {t("button.addtocart")}
+                      {t('button.addtocart')}
                     </button>
                   </div>
                 </form>

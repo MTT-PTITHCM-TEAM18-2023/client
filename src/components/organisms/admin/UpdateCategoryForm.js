@@ -43,11 +43,11 @@ const UpdateCategoryForm = ({ obSubmit, defaultValues }) => {
         autoComplete="off"
       >
         <Form.Item
-          label="Tên sản phẩm"
+          label="Tên danh mục"
           rules={[
             {
               required: true,
-              message: 'Vui lòng nhập tên sản phẩm',
+              message: 'Vui lòng nhập tên danh mục',
             },
           ]}
           required

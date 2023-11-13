@@ -23,6 +23,7 @@ import { deleteCart, updateCart } from '../../store/cart';
 import history from '../../common/utils/history';
 import ShowBill from './ShowBill';
 import './style.scss';
+import { MSG } from 'src/constants/messageCode';
 
 const formatter = new Intl.NumberFormat('en-US', {
   style: 'currency',
@@ -165,7 +166,7 @@ function CartPage() {
 
   function handleDeleteCartItem(index) {
     dispatch(deleteCart([index]));
-    message.success('Xóa sản phẩm thành công');
+    message.success(MSG.DELETE_PRODUCT_SUCCESS);
   }
 
   function handleTableChange(pagination) {
@@ -178,11 +179,18 @@ function CartPage() {
   }
 
   const handleGetCode = async () => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    const isValidEmail = emailRegex.test(infoUser.email);
+    if (!isValidEmail) {
+      message.error(MSG.INVALID_EMAIL);
+      return;
+    }
     if (infoUser.email) {
       checkoutSendOTP({ email: infoUser.email });
-      message.success('Mã code đã được gửi về mail: ' + infoUser.email);
+      message.success(MSG.CODE_SEND_AREADY + infoUser.email);
     } else {
-      message.error('Vui lòng nhập mail và gửi lại');
+      message.error(MSG.PLEASE_ENTER_MAIL);
     }
   };
 
@@ -190,15 +198,31 @@ function CartPage() {
     try {
       setLoading(true);
       if (!listOrder.length) {
-        message.error('Vui lòng chọn sản phẩm');
+        message.error(MSG.CART_EMPTY_ERROR);
         return;
       }
+      const regexPhoneNumber = /^(0[0-9]{9,10})$/;
+      const isValidPhone = regexPhoneNumber.test(infoUser.phone);
+
+      console.log('1', isValidPhone);
+      console.log('11111', infoUser.phone);
+      if (!isValidPhone) {
+        message.error(MSG.CUSTOMER_INFO_INVALID);
+        return;
+      }
+      console.log('2', infoUser.name, infoUser.address);
+      if (!infoUser.name || !infoUser.address) {
+        message.error(MSG.CUSTOMER_INFO_INVALID);
+        return;
+      }
+      console.log('3');
       const resCheckoutVerify = await checkoutVerify({
         email: infoUser.email,
         code: infoUser.code,
       });
+      console.log('4');
       if (resCheckoutVerify?.data?.status === 'ERROR') {
-        message.error(resCheckoutVerify?.data?.message);
+        message.error(MSG.CUSTOMER_INFO_INVALID);
         return;
       }
       if (resCheckoutVerify?.data?.status === 'OK') {
@@ -206,7 +230,6 @@ function CartPage() {
           'authentication_token',
           resCheckoutVerify.data?.data?.jwt
         );
-        console.log('TEST');
         const res = await placeOrder({
           items: infoUser.listOrder,
           customer: {
@@ -216,7 +239,7 @@ function CartPage() {
           },
         });
         if (res.data?.status === 'OK') {
-          message.success('Bạn đã đặt hàng thành công');
+          message.success(MSG.PLACE_ORDER_SUCCESS);
           history.push('/');
           const indexOrder = listOrder.map((item) => item?.order?.index);
           console.log('indexOrder:', indexOrder);
@@ -336,13 +359,14 @@ function CartPage() {
                     },
                   ]}
                 >
-                  <InputNumber
+                  <Input
                     className="w-full"
                     placeholder="Nhập số điện thoại"
                     value={infoUser.phone}
-                    onChange={(value) =>
-                      setInfoUser((pre) => ({ ...pre, phone: value }))
-                    }
+                    onChange={(e) => {
+                      console.log('e', e);
+                      setInfoUser((pre) => ({ ...pre, phone: e.target.value }));
+                    }}
                   />
                 </Form.Item>
                 <Form.Item

@@ -47,11 +47,11 @@ const CreateCategoryForm = ({ obSubmit }) => {
         autoComplete="off"
       >
         <Form.Item
-          label="Tên sản phẩm"
+          label="Tên danh mục"
           rules={[
             {
               required: true,
-              message: 'Vui lòng nhập tên sản phẩm',
+              message: 'Vui lòng nhập tên danh mục',
             },
           ]}
           required
@@ -68,7 +68,7 @@ const CreateCategoryForm = ({ obSubmit }) => {
           )}
         </Form.Item>
 
-        <Form.Item label="Mô tả sản phẩm">
+        <Form.Item label="Mô tả danh mục">
           <Controller
             control={control}
             name="description"

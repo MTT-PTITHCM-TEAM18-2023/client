@@ -106,27 +106,30 @@ const Products = () => {
       console.log('rés', res);
       closeModal();
       message.success(MSG.CREATE_PRODUCT_SUCCESS);
+
+      dispatch(getProducts({ page }));
     } catch {
       message.error(MSG.CREATE_PRODUCT_FAILED);
     }
   };
 
   const handleEnterProduct = async (formValues) => {
-    console.log('formValues', formValues);
     const { id, ...data } = editingProduct;
+    console.log('data', data);
     await updateProductApi(id, {
       ...data,
+      supplierId: data.suplierId,
       qty: data.qty + formValues.qty,
     });
-    message.success('Nhập sản phẩm thành công');
+    message.success(MSG.ENTER_PRODUCT_SUCCESS);
   };
 
   const handleEditProduct = async (formValues) => {
-    console.log('formValues', formValues);
     const { id, ...data } = editingProduct;
     try {
-      const res = await updateProductApi(id, { ...data, ...formValues });
-      message.error(MSG?.[res.data?.message] ?? MSG.UPDATE_PRODUCT_SUCCESS);
+      await updateProductApi(id, { ...data, ...formValues });
+      message.success(MSG.UPDATE_PRODUCT_SUCCESS);
+      closeEditModal();
     } catch {
       message.error(MSG.UPDATE_PRODUCT_FAILED);
     }
@@ -137,9 +140,10 @@ const Products = () => {
     try {
       await deleteProductApi(id);
       dispatch(getProducts({ page }));
-      message.success('Xóa sản phẩm thành công');
+      message.success(MSG.DELETE_PRODUCT_SUCCESS);
+      closeEditModal();
     } catch {
-      message.error('Xóa sản phẩm thất bại');
+      message.error(MSG.DELETE_PRODUCT_FAILED);
     }
   };
 
